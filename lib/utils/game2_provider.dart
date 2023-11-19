@@ -10,13 +10,13 @@ class NumberdleGame {
   static String game_guess = "";
   static bool gameOver = false;
   //setting the game row
-  static List<Letter> wordleRow = List.generate(
+  static List<Letter> numberdleRow = List.generate(
     5,
         (index) => Letter("", 0),
   );
 
   //Setting the gameBoard
-  List<List<Letter>> wordleBoard = List.generate(
+  List<List<Letter>> numberdleBoard = List.generate(
       5,
           (index) => List.generate(
         5,
@@ -36,7 +36,7 @@ class NumberdleGame {
 
   //Setting the game insertion
   void insertWord(index, word) {
-    wordleBoard[rowId][index] = word;
+    numberdleBoard[rowId][index] = word;
   }
 
   //checking world

@@ -11,13 +11,13 @@ class PaDGame {
   static String game_guess = "";
   static bool gameOver = false;
   //setting the game row
-  static List<Letter> wordleRow = List.generate(
+  static List<Letter> numberdleRow = List.generate(
     10, //change to 4
         (index) => Letter("", 0),
   );
 
   //Setting the gameBoard
-  List<List<Letter>> wordleBoard = List.generate(
+  List<List<Letter>> numberdleBoard = List.generate(
       10, //change to 4
           (index) => List.generate(4, //change to 4
             (index) => Letter("", 0),
@@ -36,7 +36,7 @@ class PaDGame {
 
   //Setting the game insertion
   void insertWord(index, word) {
-    wordleBoard[rowId][index] = word;
+    numberdleBoard[rowId][index] = word;
   }
 
   //checking world

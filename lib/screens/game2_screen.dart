@@ -26,7 +26,7 @@ class _Game2ScreenState extends State<Game2Screen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
+          const Text(
             "Numberdle",
             style: TextStyle(
               color: Colors.white,
@@ -34,7 +34,7 @@ class _Game2ScreenState extends State<Game2Screen> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20.0,
           ),
           Game2Keyboard(_game),

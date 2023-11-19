@@ -14,7 +14,7 @@ class _GameBoardState extends State<Game3Board> {
   @override
   Widget build(BuildContext context) {
     createRow(){
-      return Row(
+      return const Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
@@ -38,16 +38,16 @@ class _GameBoardState extends State<Game3Board> {
     }
     return Row(
         children: [Column(
-          children: widget.game.wordleBoard
+          children: widget.game.numberdleBoard
               .map((e) =>
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: e
                     .map((e) => Container(
                   width: 55.0,
-                  padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                  padding:const EdgeInsets.fromLTRB(5, 5, 5, 5),
                   height: 45.0,
-                  margin: EdgeInsets.symmetric(vertical: 1.5, horizontal: 3.0),
+                  margin: const EdgeInsets.symmetric(vertical: 1.5, horizontal: 3.0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8.0),
                     color: e.code == 0
@@ -61,7 +61,7 @@ class _GameBoardState extends State<Game3Board> {
                       child: Text(
                         e.letter!,
                         textAlign: TextAlign.center,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 22,
                           fontWeight: FontWeight.bold,

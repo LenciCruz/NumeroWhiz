@@ -22,13 +22,13 @@ class _GameKeyboardState extends State<Game3Keyboard> {
       children: [
         Text(
           PaDGame.game_message,
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
         ),
-        SizedBox(
+        const SizedBox(
           height: 5.0,
         ),
         Game3Board(widget.game),
-        SizedBox(
+        const SizedBox(
           height: 20.0,
         ),
         Row(
@@ -53,7 +53,7 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                 ),
                 child: Text(
                   "${e}",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 21.0,
                     fontWeight: FontWeight.bold,
                   ),
@@ -62,7 +62,7 @@ class _GameKeyboardState extends State<Game3Keyboard> {
             );
           }).toList(),
         ),
-        SizedBox(
+        const SizedBox(
           height: 5.0,
         ),
         Row(
@@ -83,7 +83,7 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                 } else if (e == "SUBMIT") {
                   // setting the game rules
                   if (widget.game.letterId >= 4) {
-                    String guess = widget.game.wordleBoard[widget.game.rowId]
+                    String guess = widget.game.numberdleBoard[widget.game.rowId]
                         .map((e) => e.letter)
                         .join();
                     print(guess);
@@ -92,7 +92,7 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                       if (guess == PaDGame.game_guess) {
                         setState(() {
                           PaDGame.game_message = "Congratulations🎉";
-                          widget.game.wordleBoard[widget.game.rowId]
+                          widget.game.numberdleBoard[widget.game.rowId]
                               .forEach((element) {
                             element.code = 1;
                             correctNums = 4;
@@ -115,7 +115,7 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                               setState(() {
                                 PaDGame.game_message = "";
                                 print(char);
-                                widget.game.wordleBoard[widget.game.rowId][i]
+                                widget.game.numberdleBoard[widget.game.rowId][i]
                                     .code = 1;
                                 correctNums++;
                                 correctPos++;
@@ -126,7 +126,7 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                               setState(() {
                                 PaDGame.game_message = "";
                                 print(char);
-                                widget.game.wordleBoard[widget.game.rowId][i]
+                                widget.game.numberdleBoard[widget.game.rowId][i]
                                     .code = 1;
                                 correctNums++;
                                 print("correct Nums: " + correctNums.toString());
@@ -137,7 +137,7 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                             setState(() {
                               PaDGame.game_message = "";
                               print(char);
-                              widget.game.wordleBoard[widget.game.rowId][i]
+                              widget.game.numberdleBoard[widget.game.rowId][i]
                                   .code = 1;
 
                             });
@@ -162,14 +162,14 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                 }
               },
               child: Container(
-                padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.0),
                   color: Colors.grey.shade300,
                 ),
                 child: Text(
                   "${e}",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18.0,
                     fontWeight: FontWeight.bold,
                   ),

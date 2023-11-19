@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'how_to_play.dart';
 import 'game2_screen.dart';
 import 'game3_screen.dart';
 
@@ -9,7 +10,7 @@ class MainMenu extends StatelessWidget {
       initialRoute: '/mainmenu',
       routes: {
         '/mainmenu': (context) => MainMenuPage(),
-      // for how to play:  '/instructions': (context) => const
+        '/instructions': (context) => howToPlay(),
       //  '/game1': (context) => const Game1Screen(),
         '/game2': (context) => const Game2Screen(),
         '/game3': (context) => const Game3Screen(),
@@ -37,7 +38,7 @@ class MainMenuPage extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // Navigate to how to play page
-                //  Navigator.pushNamed(context, '/screen1');
+                Navigator.pushNamed(context, '/instructions');
               },
               child: const Text('How to Play'),
             ),

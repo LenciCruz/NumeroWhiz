@@ -26,15 +26,15 @@ class _GameKeyboardState extends State<Game2Keyboard> {
       children: [
         Text(
           NumberdleGame.game_message,
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
         ),
-        SizedBox(height: 0.0),
+        const SizedBox(height: 0.0),
         Game2Board(widget.game),
-        SizedBox(height: 5.0),
+        const SizedBox(height: 5.0),
         for (List<String> row in rows)
           Container(
             //: EdgeInsets.only(bottom: 8.0),
-            margin: EdgeInsets.symmetric(vertical: 8.0),
+            margin: const EdgeInsets.symmetric(vertical: 8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: row.map((e) {
@@ -43,14 +43,14 @@ class _GameKeyboardState extends State<Game2Keyboard> {
                     handleKeyboardTap(e);
                   },
                   child: Container(
-                    padding: EdgeInsets.all(25.0),
+                    padding: const EdgeInsets.all(25.0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8.0),
                       color: Colors.grey.shade300,
                     ),
                     child: Text(
                       "${e}",
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 18.0,
                         fontWeight: FontWeight.bold,
                       ),
@@ -75,7 +75,7 @@ class _GameKeyboardState extends State<Game2Keyboard> {
     } else if (value == "SUBMIT") {
       // setting the game rules
       if (widget.game.letterId >= 5) {
-        String guess = widget.game.wordleBoard[widget.game.rowId]
+        String guess = widget.game.numberdleBoard[widget.game.rowId]
             .map((e) => e.letter)
             .join();
         print(guess);
@@ -84,7 +84,7 @@ class _GameKeyboardState extends State<Game2Keyboard> {
           //checkword
           if (guess == NumberdleGame.game_guess) {
             setState(() {
-              widget.game.wordleBoard[widget.game.rowId].forEach((element) {
+              widget.game.numberdleBoard[widget.game.rowId].forEach((element) {
                 element.code = 1;
               });
             });
@@ -103,20 +103,20 @@ class _GameKeyboardState extends State<Game2Keyboard> {
                   setState(() {
                     NumberdleGame.game_message = "";
                     print(char);
-                    widget.game.wordleBoard[widget.game.rowId][i].code = 1;
+                    widget.game.numberdleBoard[widget.game.rowId][i].code = 1;
                   });
                 } else {
                   setState(() {
                     NumberdleGame.game_message = "";
                     print(char);
-                    widget.game.wordleBoard[widget.game.rowId][i].code = 2;
+                    widget.game.numberdleBoard[widget.game.rowId][i].code = 2;
                   });
                 }
               } else {
                 setState(() {
                   NumberdleGame.game_message = "";
                   print(char);
-                  widget.game.wordleBoard[widget.game.rowId][i].code = 3;
+                  widget.game.numberdleBoard[widget.game.rowId][i].code = 3;
                 });
               }
             }
@@ -147,13 +147,13 @@ void _showAlertDialog(BuildContext context, String message) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text(
+        title:const Text(
           'NumeroWhiz Alert',
           style: TextStyle(fontSize: 20.0), // Set the title font size
         ),
         content: Text(
           message,
-          style: TextStyle(fontSize: 18.0), // Set the content font size
+          style: const TextStyle(fontSize: 18.0), // Set the content font size
         ),
         actions: [
           TextButton(
@@ -168,7 +168,7 @@ void _showAlertDialog(BuildContext context, String message) {
               backgroundColor: Colors.blue,
               primary: Colors.white,
             ),
-            child: Text(
+            child: const Text(
               'Play Again',
               style: TextStyle(fontSize: 16.0), // Set the button font size
             ),
@@ -185,7 +185,7 @@ void _showAlertDialog(BuildContext context, String message) {
               backgroundColor: Colors.green,
               primary: Colors.white,
             ),
-            child: Text(
+            child: const Text(
               'Main Menu',
               style: TextStyle(fontSize: 16.0), // Set the button font size
             ),

@@ -27,7 +27,7 @@ class _GameScreenState extends State<Game3Screen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
+          const Text(
             "Game 3",
             style: TextStyle(
               color: Colors.white,
@@ -35,7 +35,7 @@ class _GameScreenState extends State<Game3Screen> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10.0,
           ),
           Game3Keyboard(_game),
