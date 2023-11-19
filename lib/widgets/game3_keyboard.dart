@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../utils/game3_provider.dart';
 import 'game3_board.dart';
@@ -32,39 +31,6 @@ class _GameKeyboardState extends State<Game3Keyboard> {
         SizedBox(
           height: 20.0,
         ),
-        /*Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: row1.map((e) {
-            return InkWell(
-              onTap: () {
-                print(e);
-                if (widget.game.letterId < 5) {
-                  print(widget.game.rowId);
-                  widget.game.insertWord(widget.game.letterId, Letter(e, 0));
-                  widget.game.letterId++;
-                  setState(() {});
-                }
-              },
-              child: Container(
-                padding: EdgeInsets.all(10.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.0),
-                  color: Colors.grey.shade300,
-                ),
-                child: Text(
-                  "${e}",
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            );
-          }).toList(),
-        ),
-        SizedBox(
-          height: 10.0,
-        ),*/
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: row2.map((e) {
@@ -117,11 +83,6 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                 } else if (e == "SUBMIT") {
                   // setting the game rules
                   if (widget.game.letterId >= 4) {
-                    /* widget.game.wordleBoard[widget.game.rowId].replaceRange(
-                      0,
-                      5,
-                      List.generate(5, (index) => Letter("", 3)),
-                    ); */
                     String guess = widget.game.wordleBoard[widget.game.rowId]
                         .map((e) => e.letter)
                         .join();

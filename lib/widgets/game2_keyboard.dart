@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 import '../screens/game2_screen.dart';
 import '../screens/mainmenu_screen.dart';
 import '../utils/game2_provider.dart';
@@ -144,42 +143,61 @@ class _GameKeyboardState extends State<Game2Keyboard> {
 
 
 void _showAlertDialog(BuildContext context, String message) {
-  Alert(
+  showDialog(
     context: context,
-    title: 'Alert Dialog',
-    desc: message,
-    buttons: [
-      DialogButton(
-        onPressed: () {
-          Navigator.pop(context);
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const Game2Screen()),
-          );
-        },
-        color: Colors.blue,
-        child: const Text(
-          'Play Again',
-          style: TextStyle(color: Colors.white),
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text(
+          'NumeroWhiz Alert',
+          style: TextStyle(fontSize: 20.0), // Set the title font size
         ),
-      ),
-      DialogButton(
-        onPressed: () {
-          Navigator.pop(context);
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => MainMenu()),
-          );
-        },
-        color: Colors.green,
-        child: const Text(
-          'Main Menu',
-          style: TextStyle(color: Colors.white),
+        content: Text(
+          message,
+          style: TextStyle(fontSize: 18.0), // Set the content font size
         ),
-      ),
-    ],
-  ).show();
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context); // Close the alert
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Game2Screen()),
+              );
+            },
+            style: TextButton.styleFrom(
+              backgroundColor: Colors.blue,
+              primary: Colors.white,
+            ),
+            child: Text(
+              'Play Again',
+              style: TextStyle(fontSize: 16.0), // Set the button font size
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context); // Close the alert
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MainMenu()),
+              );
+            },
+            style: TextButton.styleFrom(
+              backgroundColor: Colors.green,
+              primary: Colors.white,
+            ),
+            child: Text(
+              'Main Menu',
+              style: TextStyle(fontSize: 16.0), // Set the button font size
+            ),
+          ),
+        ],
+      );
+    },
+  );
 }
+
+
+
 
 
 
