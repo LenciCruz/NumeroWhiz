@@ -1,7 +1,5 @@
 import 'dart:math';
 
-//import 'package:wordle_clone/widgets/game_board.dart';
-
 class PaDGame {
 
   //setting the game variables
@@ -23,7 +21,7 @@ class PaDGame {
             (index) => Letter("", 0),
       ));
 
-  //Setting the Game Functon
+  //Setting the Game Function
   void passTry() {
     rowId++;
     letterId = 0;

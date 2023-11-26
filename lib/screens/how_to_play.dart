@@ -34,7 +34,7 @@ class howToPlay extends StatelessWidget {
 
             // Sub-header 1
             Text(
-              'Sub-header 1',
+              'Game 1: Higher Lower',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -50,7 +50,7 @@ class howToPlay extends StatelessWidget {
 
             // Sub-header 2
             Text(
-              'Sub-header 2',
+              'Game 2: Numberdle',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -66,7 +66,7 @@ class howToPlay extends StatelessWidget {
 
             // Sub-header 3
             Text(
-              'Sub-header 3',
+              'Game 3: Peek-a-Digit',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,

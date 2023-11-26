@@ -1,4 +1,6 @@
+import 'package:NumeroWhiz/screens/game3_screen.dart';
 import 'package:flutter/material.dart';
+import '../screens/mainmenu_screen.dart';
 import '../utils/game3_provider.dart';
 import 'game3_board.dart';
 
@@ -46,7 +48,7 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                 }
               },
               child: Container(
-                padding: EdgeInsets.fromLTRB(25, 10, 25, 10),
+                padding: const EdgeInsets.fromLTRB(25, 10, 25, 10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.0),
                   color: Colors.grey.shade300,
@@ -91,7 +93,6 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                     if (widget.game.noRepeating(guess)) { //checkword
                       if (guess == PaDGame.game_guess) {
                         setState(() {
-                          PaDGame.game_message = "Congratulations🎉";
                           widget.game.numberdleBoard[widget.game.rowId]
                               .forEach((element) {
                             element.code = 1;
@@ -99,8 +100,9 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                             correctPos = 4;
                             print("correct Nums: " + correctNums.toString());
                             print("correct Pos: " + correctPos.toString());
-
                           });
+                          //show alert
+                          _showAlertDialog(context, 'Congratulations🎉, you guessed the number!');
                         });
                       } else {
                         print(PaDGame.game_guess);
@@ -182,3 +184,59 @@ class _GameKeyboardState extends State<Game3Keyboard> {
     );
   }
 }
+
+
+void _showAlertDialog(BuildContext context, String message) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title:const Text(
+          'NumeroWhiz Alert',
+          style: TextStyle(fontSize: 20.0), // Set the title font size
+        ),
+        content: Text(
+          message,
+          style: const TextStyle(fontSize: 18.0), // Set the content font size
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context); // Close the alert
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Game3Screen()),
+              );
+            },
+            style: TextButton.styleFrom(
+              backgroundColor: Colors.blue,
+              foregroundColor: Colors.white,
+            ),
+            child: const Text(
+              'Play Again',
+              style: TextStyle(fontSize: 16.0), // Set the button font size
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context); // Close the alert
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MainMenu()),
+              );
+            },
+            style: TextButton.styleFrom(
+              backgroundColor: Colors.green,
+              foregroundColor: Colors.white,
+            ),
+            child: const Text(
+              'Main Menu',
+              style: TextStyle(fontSize: 16.0), // Set the button font size
+            ),
+          ),
+        ],
+      );
+    },
+  );
+}
+

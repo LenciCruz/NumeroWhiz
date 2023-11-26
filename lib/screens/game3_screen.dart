@@ -10,11 +10,10 @@ class Game3Screen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<Game3Screen> {
-  PaDGame _game = PaDGame();
+  final PaDGame _game = PaDGame();
   late String word;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     PaDGame.initGame();
   }
