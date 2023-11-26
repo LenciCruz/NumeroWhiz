@@ -11,7 +11,7 @@ class MainMenu extends StatelessWidget {
       routes: {
         '/mainmenu': (context) => MainMenuPage(),
         '/instructions': (context) => howToPlay(),
-      //  '/game1': (context) => const Game1Screen(),
+      //  '/game1': (context) => ,
         '/game2': (context) => const Game2Screen(),
         '/game3': (context) => const Game3Screen(),
       },
@@ -24,7 +24,7 @@ class MainMenuPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Main Menu'),
+        title: const Text('Main Menu'),
       ),
       body: Center(
         child: Column(
@@ -35,35 +35,54 @@ class MainMenuPage extends StatelessWidget {
               style: TextStyle(fontSize: 20),
             ),
             const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                // Navigate to how to play page
-                Navigator.pushNamed(context, '/instructions');
-              },
-              child: const Text('How to Play'),
-            ),
-            ElevatedButton(
+
+            OutlinedButton(
               onPressed: () {
                 // Navigate to game 1
-              //  Navigator.pushNamed(context, '/screen1');
+                Navigator.pushNamed(context, '/game1');
               },
+              style: OutlinedButton.styleFrom(
+                side: BorderSide(color: Colors.green, width: 2.0), // Change the color and thickness of the border
+                backgroundColor: Colors.transparent, // Set a transparent background
+              ),
               child: const Text('Game 1'),
             ),
             const SizedBox(height: 20),
-            ElevatedButton(
+            OutlinedButton(
               onPressed: () {
                 // Navigate to game 2
                 Navigator.pushNamed(context, '/game2');
               },
+              style: OutlinedButton.styleFrom(
+                side: BorderSide(color: Colors.yellow, width: 2.0), // Change the color and thickness of the border
+                backgroundColor: Colors.transparent, // Set a transparent background
+              ),
               child: const Text('Game 2'),
             ),
             const SizedBox(height: 20),
-            ElevatedButton(
+            OutlinedButton(
               onPressed: () {
-                // Navigate to game 2
+                // Navigate to game 3
                 Navigator.pushNamed(context, '/game3');
               },
+              style: OutlinedButton.styleFrom(
+                side: BorderSide(color: Colors.red, width: 2.0), // Change the color and thickness of the border
+                backgroundColor: Colors.transparent, // Set a transparent background
+              ),
               child: const Text('Game 3'),
+            ),
+            const SizedBox(height: 20),
+
+            OutlinedButton(
+              onPressed: () {
+                // Navigate to how to play page
+                Navigator.pushNamed(context, '/instructions');
+              },
+              style: OutlinedButton.styleFrom(
+                side: BorderSide(color: Colors.grey, width: 2.0), // Change the color and thickness of the border
+                backgroundColor: Colors.transparent, // Set a transparent background
+              ),
+              child: const Text('How to Play'),
             ),
           ],
         ),
