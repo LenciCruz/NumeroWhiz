@@ -80,6 +80,7 @@ class _GameKeyboardState extends State<Game2Keyboard> {
             .join();
         print(guess);
         print(NumberdleGame.game_guess == guess);
+
         if (widget.game.noRepeating(guess)) {
           //checkword
           if (guess == NumberdleGame.game_guess) {
@@ -88,10 +89,12 @@ class _GameKeyboardState extends State<Game2Keyboard> {
                 element.code = 1;
               });
             });
-            //show alert
-            //hindi naaalis yung alert
-            _showAlertDialog(context, 'Congratulations🎉, you guessed the number!');
-          //TODO: add showalertdialog pag di nahulaan
+            // Check if the user has won and show an alert after 2 seconds
+            Future.delayed(const Duration(seconds: 2), () {
+              _showAlertDialog(
+                  context, 'Congratulations🎉, you guessed the number!');
+            });
+
           } else {
             print(NumberdleGame.game_guess);
             int listLength = guess.length;
@@ -122,8 +125,17 @@ class _GameKeyboardState extends State<Game2Keyboard> {
             }
             widget.game.rowId++;
             widget.game.letterId = 0;
+
+            // Check if the user has failed and show an alert after 2 seconds
+            if (widget.game.rowId >= 5) {
+              Future.delayed(const Duration(seconds: 2), () {
+                _showAlertDialog(context,
+                    'Sorry, you failed to guess the number. Try again!');
+              });
+            }
           }
-        } else {
+        }
+        else {
           setState(() {
             NumberdleGame.game_message =
             "Input has repeating values. Try again.";
@@ -134,11 +146,11 @@ class _GameKeyboardState extends State<Game2Keyboard> {
       if (widget.game.letterId < 5) {
         widget.game.insertWord(widget.game.letterId, Letter(value, 0));
         widget.game.letterId++;
-        setState(() {
-        });
+        setState(() {});
       }
     }
   }
+
 }
 
 
@@ -166,7 +178,7 @@ void _showAlertDialog(BuildContext context, String message) {
             },
             style: TextButton.styleFrom(
               backgroundColor: Colors.blue,
-              primary: Colors.white,
+              foregroundColor: Colors.white,
             ),
             child: const Text(
               'Play Again',
@@ -183,7 +195,7 @@ void _showAlertDialog(BuildContext context, String message) {
             },
             style: TextButton.styleFrom(
               backgroundColor: Colors.green,
-              primary: Colors.white,
+              foregroundColor: Colors.white,
             ),
             child: const Text(
               'Main Menu',
