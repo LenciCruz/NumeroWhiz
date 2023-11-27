@@ -102,7 +102,12 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                             print("correct Pos: " + correctPos.toString());
                           });
                           //show alert
-                          _showAlertDialog(context, 'Congratulations🎉, you guessed the number!');
+                          // Check if the user has won and show an alert after 1.5 seconds
+                          Future.delayed(const Duration(milliseconds: 800), () {
+                            _showAlertDialog(
+                                context,
+                                'Congratulations🎉, you guessed the number!');
+                          });
                         });
                       } else {
                         print(PaDGame.game_guess);
@@ -121,7 +126,8 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                                     .code = 1;
                                 correctNums++;
                                 correctPos++;
-                                print("correct Nums: " + correctNums.toString());
+                                print(
+                                    "correct Nums: " + correctNums.toString());
                                 print("correct Pos: " + correctPos.toString());
                               });
                             } else {
@@ -131,7 +137,8 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                                 widget.game.numberdleBoard[widget.game.rowId][i]
                                     .code = 1;
                                 correctNums++;
-                                print("correct Nums: " + correctNums.toString());
+                                print(
+                                    "correct Nums: " + correctNums.toString());
                                 print("correct Pos: " + correctPos.toString());
                               });
                             }
@@ -141,12 +148,17 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                               print(char);
                               widget.game.numberdleBoard[widget.game.rowId][i]
                                   .code = 1;
-
                             });
                           }
                         }
                         widget.game.rowId++;
                         widget.game.letterId = 0;
+                        // Check if the user has failed and show an alert after 2 seconds
+                        if (widget.game.rowId >= 10) {
+                          Future.delayed(const Duration(seconds: 2), () {
+                            _showAlertDialog(context, 'Sorry, you failed to guess the number. Try again!');
+                          });
+                        }
                       }
                     }else{
                       setState(() {
@@ -155,7 +167,7 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                     }
                   }
                 } else {
-                  if (widget.game.letterId < 4) { //change to 4
+                  if (widget.game.letterId < 4) {
                     print(widget.game.rowId);
                     widget.game.insertWord(widget.game.letterId, Letter(e, 0));
                     widget.game.letterId++;

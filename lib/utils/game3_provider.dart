@@ -10,13 +10,13 @@ class PaDGame {
   static bool gameOver = false;
   //setting the game row
   static List<Letter> numberdleRow = List.generate(
-    10, //change to 4
+    10,
         (index) => Letter("", 0),
   );
 
   //Setting the gameBoard
   List<List<Letter>> numberdleBoard = List.generate(
-      10, //change to 4
+      10,
           (index) => List.generate(4, //change to 4
             (index) => Letter("", 0),
       ));
