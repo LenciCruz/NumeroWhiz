@@ -23,7 +23,7 @@ class _Game2ScreenState extends State<Game2Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF212121),
+      backgroundColor: const Color(0xFF212121),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,

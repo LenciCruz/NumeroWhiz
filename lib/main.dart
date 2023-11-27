@@ -21,7 +21,6 @@ class HomePage extends StatelessWidget {
       // Remove the AppBar
       appBar: null,
       body: Container(
-        // Use a solid color instead of a gradient
         color: const Color(0xFF212121),
         child: Center(
           child: Column(
