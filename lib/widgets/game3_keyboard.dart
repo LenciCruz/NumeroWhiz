@@ -153,6 +153,7 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                         }
                         widget.game.rowId++;
                         widget.game.letterId = 0;
+
                         // Check if the user has failed and show an alert after 2 seconds
                         if (widget.game.rowId >= 10) {
                           Future.delayed(const Duration(seconds: 2), () {

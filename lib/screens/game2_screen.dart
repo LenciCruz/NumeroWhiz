@@ -28,24 +28,27 @@ class _Game2ScreenState extends State<Game2Screen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            alignment: Alignment.topLeft,
-            padding: const EdgeInsets.only(left: 16, top: 16),
-            child: IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.white, size: 32),
-              onPressed: () {
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainMenuPage()));
-              },
-            ),
-          ),
-          const SizedBox(height: 20.0),
-          const Text(
-            "Numberdle",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 36,
-              fontWeight: FontWeight.bold,
-            ),
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0),
+                child: IconButton(
+                  icon: const Icon(Icons.arrow_back, color: Colors.white, size: 32),
+                  onPressed: () {
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainMenuPage()));
+                  },
+                ),
+              ),
+              const SizedBox(width: 60.0),
+              const Text(
+                "Numberdle",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 36,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 20.0),
           Game2Keyboard(_game),
