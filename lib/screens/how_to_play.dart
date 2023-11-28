@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'mainmenu_screen.dart';
 
 void main() {
   runApp(howToPlay());
@@ -7,80 +9,230 @@ void main() {
 class howToPlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'scrollablelistview',
+      theme: ThemeData(),
+      home: MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key}) : super(key: key);
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      // This allows the body to extend behind the app bar
       appBar: AppBar(
-        title: const Text('How to Play'),
-      ),
-      body: const Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Title Header
-            Text(
-              'Title Header',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 8),
-            // Paragraph for Title Header
-            Text(
-              'This is the paragraph for the title header. Add your content here.',
-              style: TextStyle(fontSize: 16),
-            ),
-            SizedBox(height: 16),
-
-            // Sub-header 1
-            Text(
-              'Game 1: Higher Lower',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 8),
-            // Paragraph for Sub-header 1
-            Text(
-              'This is the paragraph for sub-header 1. Add your content here.',
-              style: TextStyle(fontSize: 16),
-            ),
-            SizedBox(height: 16),
-
-            // Sub-header 2
-            Text(
-              'Game 2: Numberdle',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 8),
-            // Paragraph for Sub-header 2
-            Text(
-              'This is the paragraph for sub-header 2. Add your content here.',
-              style: TextStyle(fontSize: 16),
-            ),
-            SizedBox(height: 16),
-
-            // Sub-header 3
-            Text(
-              'Game 3: Peek-a-Digit',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 8),
-            // Paragraph for Sub-header 3
-            Text(
-              'This is the paragraph for sub-header 3. Add your content here.',
-              style: TextStyle(fontSize: 16),
-            ),
-            SizedBox(height: 16),
-          ],
+        title: Text(
+          'How To Play',
+          style: GoogleFonts.lilitaOne(
+            fontSize: 35,
+            color: Color(0xFFA5D7E8),
+          ),
         ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainMenuPage()));
+          },
+        ),
+        centerTitle: true,
+      ),
+      body: Stack(
+        children: [
+          Container(
+            //add top margin here
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color(0xFF212121),
+                  Color(0xFF43535E),
+                ],
+              ),
+            ),
+          ),
+          ListView(
+            scrollDirection: Axis.horizontal,
+            children: [
+              Padding(
+                padding: EdgeInsets.fromLTRB(8, 50, 8, 8),
+                //padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 350,
+                      height: 700,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Color(0xFF4E7D26),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'assets/higherlower.png',
+                            // replace with your image asset
+                            width: 200, // set the width of the image
+                            height: 200, // set the height of the image
+                          ),
+                          SizedBox(height: 20),
+                          Text(
+                            'Higher Lower',
+                            style: GoogleFonts.lilitaOne(
+                              fontSize: 35,
+                              color: Color(0xFFF9C425),
+                            ),
+                          ),
+                          Text('EASY',
+                              style: GoogleFonts.archivoBlack(
+                                  fontSize: 15,
+                                  color: Colors.black,
+                                  letterSpacing: 10.0)),
+                          SizedBox(height: 20),
+                          Center(
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 30),
+                              child: Text(
+                                'The goal is to guess the random number generated by the game, which is between 1 and 99. The user has unlimited attempts and will be prompted by the game if the guess made is higher or lower than the number generated. The process repeats until the user guesses the correct number. ',
+                                style: GoogleFonts.archivoNarrow(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                ),
+                                textAlign: TextAlign.justify,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(8, 50, 8, 8),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 350,
+                      height: 700,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Color(0xFFF9C425),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'assets/numberdle.png',
+                            // replace with your image asset
+                            width: 200, // set the width of the image
+                            height: 200, // set the height of the image
+                          ),
+                          SizedBox(height: 20),
+                          Text(
+                            'Numberdle',
+                            style: GoogleFonts.lilitaOne(
+                              fontSize: 35,
+                              color: Color(0xFFFF3D00),
+                            ),
+                          ),
+                          Text('MEDIUM',
+                              style: GoogleFonts.archivoBlack(
+                                  fontSize: 15,
+                                  color: Colors.white,
+                                  letterSpacing: 10.0)),
+                          SizedBox(height: 10),
+                          Center(
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 30),
+                              child: Text(
+                                'The goal is to guess the random non-repeating, 4-digit generated by the game. The user has a maximum of 5 attempts. The app provides feedback, indicating colors such as green colored tiles for correct numbers, yellow colored tiles for numbers in the wrong position, and red colored tiles for numbers not found in the number generated. Players may use this as hints to improve their guesses within the limited attempts.',
+                                style: GoogleFonts.archivoNarrow(
+                                  fontSize: 20,
+                                  color: Colors.black,
+                                ),
+                                textAlign: TextAlign.justify,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(8, 50, 8, 8),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 350,
+                      height: 700,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Color(0xFFB12626),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'assets/peekadigit.png',
+                            // replace with your image asset
+                            width: 200, // set the width of the image
+                            height: 200, // set the height of the image
+                          ),
+                          SizedBox(height: 20),
+                          Text(
+                            'Peek-A-Digit',
+                            style: GoogleFonts.lilitaOne(
+                              fontSize: 35,
+                              color: Color(0xFF76A64C),
+                            ),
+                          ),
+                          Text('DIFFICULT',
+                              style: GoogleFonts.archivoBlack(
+                                  fontSize: 15,
+                                  color: Colors.black,
+                                  letterSpacing: 10.0)),
+                          SizedBox(height: 20),
+                          Center(
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 30),
+                              child: Text(
+                                'The goal is to guess the random non-repeating, 4-digit generated by the game. The user has a maximum of 10 attempts. The app provides feedback, indicating number of correct digits and number of digits in the right position on the right side of the screen. Players may use this as hints to improve their guesses within the limited attempts.',
+                                style: GoogleFonts.archivoNarrow(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                ),
+                                textAlign: TextAlign.justify,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

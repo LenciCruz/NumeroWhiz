@@ -50,7 +50,7 @@ class _Game2ScreenState extends State<Game2Screen> {
               ),
             ],
           ),
-          const SizedBox(height: 20.0),
+          const SizedBox(height: 2.0),
           Game2Keyboard(_game),
         ],
       ),

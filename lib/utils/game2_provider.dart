@@ -11,7 +11,7 @@ class NumberdleGame {
   static bool gameOver = false;
   //setting the game row
   static List<Letter> numberdleRow = List.generate(
-    5,
+    4,
         (index) => Letter("", 0),
   );
 
@@ -19,7 +19,7 @@ class NumberdleGame {
   List<List<Letter>> numberdleBoard = List.generate(
       5,
           (index) => List.generate(
-        5,
+        4,
             (index) => Letter("", 0),
       ));
 
@@ -31,7 +31,9 @@ class NumberdleGame {
 
   static void initGame() {
     List<int> digits = List.generate(10, (index) => index)..shuffle();
-    game_guess = "${digits[0]}${digits[1]}${digits[2]}${digits[3]}${digits[4]}";
+//    game_guess = "${digits[0]}${digits[1]}${digits[2]}${digits[3]}${digits[4]}";
+    game_guess = "${digits[0]}${digits[1]}${digits[2]}${digits[3]}";
+
   }
 
   //Setting the game insertion

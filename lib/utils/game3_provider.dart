@@ -17,10 +17,10 @@ class PaDGame {
   //Setting the gameBoard
   List<List<Letter>> numberdleBoard = List.generate(
       10,
-          (index) => List.generate(4, //change to 4
+          (index) => List.generate(
+            4,
             (index) => Letter("", 0),
       ));
-
   //Setting the Game Function
   void passTry() {
     rowId++;

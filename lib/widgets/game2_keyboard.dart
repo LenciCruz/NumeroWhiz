@@ -15,7 +15,7 @@ class Game2Keyboard extends StatefulWidget {
 
 class _GameKeyboardState extends State<Game2Keyboard> {
   List<List<String>> rows = [
-    ["1", "2", "3", "4", "5"],
+    ["0", "1", "2", "3", "4"],
     ["6", "7", "8", "9", "0"],
     ["DELETE", "SUBMIT"],
   ];
@@ -74,7 +74,7 @@ class _GameKeyboardState extends State<Game2Keyboard> {
       }
     } else if (value == "SUBMIT") {
       // setting the game rules
-      if (widget.game.letterId >= 5) {
+      if (widget.game.letterId >= 4) {
         String guess = widget.game.numberdleBoard[widget.game.rowId]
             .map((e) => e.letter)
             .join();
@@ -127,7 +127,7 @@ class _GameKeyboardState extends State<Game2Keyboard> {
             widget.game.letterId = 0;
 
             // Check if the user has failed and show an alert after 2 seconds
-            if (widget.game.rowId >= 5) {
+            if (widget.game.rowId >= 4) {
               Future.delayed(const Duration(seconds: 2), () {
                 _showAlertDialog(context, 'Sorry, you failed to guess the number. Try again!');
               });
@@ -142,7 +142,7 @@ class _GameKeyboardState extends State<Game2Keyboard> {
         }
       }
     } else {
-      if (widget.game.letterId < 5) {
+      if (widget.game.letterId < 4) {
         widget.game.insertWord(widget.game.letterId, Letter(value, 0));
         widget.game.letterId++;
         setState(() {});
@@ -170,9 +170,7 @@ void _showAlertDialog(BuildContext context, String message) {
           TextButton(
             onPressed: () {
               Navigator.pop(context); // Close the alert
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Game2Screen()),
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const Game2Screen()),
               );
             },
             style: TextButton.styleFrom(
@@ -187,9 +185,7 @@ void _showAlertDialog(BuildContext context, String message) {
           TextButton(
             onPressed: () {
               Navigator.pop(context); // Close the alert
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => MainMenu()),
+              Navigator.push(context, MaterialPageRoute(builder: (context) => MainMenu()),
               );
             },
             style: TextButton.styleFrom(

@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import '../utils/game3_provider.dart';
 
 class Game3Board extends StatefulWidget {
-  Game3Board(this.game, {Key? key}) : super(key: key);
+  Game3Board(this.game, this.correctNums, this.correctPos, {Key? key})
+      : super(key: key);
   PaDGame game;
+  int correctNums;
+  int correctPos;
 
   @override
   State<Game3Board> createState() => _GameBoardState();
@@ -19,8 +22,8 @@ class _GameBoardState extends State<Game3Board> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0.0),
-              //margin: EdgeInsets.fromLTRB(35, 0, 0, 0),
+              padding:
+              const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0.0),
               child: const Text(
                 "Correct",
                 style: TextStyle(
@@ -31,8 +34,8 @@ class _GameBoardState extends State<Game3Board> {
               ),
             ),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0.0),
-              //margin: EdgeInsets.fromLTRB(35, 0, 0, 0),
+              padding:
+              const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0.0),
               child: const Text(
                 "Correct",
                 style: TextStyle(
@@ -44,13 +47,12 @@ class _GameBoardState extends State<Game3Board> {
             ),
           ],
         ),
-
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-              //margin: EdgeInsets.fromLTRB(35, 0, 0, 0),
+              padding:
+              const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               child: const Text(
                 "Your Guesses",
                 style: TextStyle(
@@ -61,10 +63,9 @@ class _GameBoardState extends State<Game3Board> {
               ),
             ),
             const Spacer(),
-
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-              //margin: EdgeInsets.fromLTRB(25, 0, 0,0),
+              padding:
+              const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               child: const Text(
                 "Position",
                 style: TextStyle(
@@ -74,10 +75,9 @@ class _GameBoardState extends State<Game3Board> {
                 ),
               ),
             ),
-
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
-              //margin: EdgeInsets.fromLTRB(85, 0, 0,0),
+              padding:
+              const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
               child: const Text(
                 "Number",
                 style: TextStyle(
@@ -104,11 +104,9 @@ class _GameBoardState extends State<Game3Board> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.0),
                   color: e[i].code == 0
-                      ? Colors.grey.shade800
+                      ? Color(0xFF212121)
                       : e[i].code == 1
-                      ? Colors.green.shade400
-                      : e[i].code == 2
-                      ? Colors.amber.shade400
+                      ? Colors.black54
                       : Colors.red,
                 ),
                 child: Center(
@@ -135,11 +133,11 @@ class _GameBoardState extends State<Game3Board> {
                 borderRadius: BorderRadius.circular(8.0),
                 color: const Color(0xFF212121),
               ),
-              child: const Center(
+              child: Center(
                 child: Text(
-                  "1", //insert result here
+                  widget.correctPos.toString(), // Use widget.correctPos
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
@@ -158,9 +156,9 @@ class _GameBoardState extends State<Game3Board> {
                 borderRadius: BorderRadius.circular(8.0),
                 color: const Color(0xFF212121),
               ),
-              child: const Center(
+              child: Center(
                 child: Text(
-                  "1", //insert result here
+                  widget.correctNums.toString(), // Use widget.correctNums
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,
@@ -169,8 +167,8 @@ class _GameBoardState extends State<Game3Board> {
                   ),
                 ),
               ),
-            ), const SizedBox(width: 10.0)
-            ,
+            ),
+            const SizedBox(width: 10.0),
           ],
         )),
       ],

@@ -4,7 +4,6 @@ import '../screens/mainmenu_screen.dart';
 import '../utils/game3_provider.dart';
 import 'game3_board.dart';
 
-
 class Game3Keyboard extends StatefulWidget {
   Game3Keyboard(this.game, {Key? key}) : super(key: key);
   PaDGame game;
@@ -29,7 +28,7 @@ class _GameKeyboardState extends State<Game3Keyboard> {
         const SizedBox(
           height: 5.0,
         ),
-        Game3Board(widget.game),
+        Game3Board(widget.game,correctNums, correctPos),
         const SizedBox(
           height: 20.0,
         ),
@@ -90,7 +89,8 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                         .join();
                     print(guess);
                     print(PaDGame.game_guess == guess);
-                    if (widget.game.noRepeating(guess)) { //checkword
+                    if (widget.game.noRepeating(guess)) {
+                      // checkword
                       if (guess == PaDGame.game_guess) {
                         setState(() {
                           widget.game.numberdleBoard[widget.game.rowId]
@@ -101,13 +101,17 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                             print("correct Nums: " + correctNums.toString());
                             print("correct Pos: " + correctPos.toString());
                           });
-                          //show alert
+                          // show alert
                           // Check if the user has won and show an alert after 1.5 seconds
-                          Future.delayed(const Duration(milliseconds: 800), () {
-                            _showAlertDialog(
+                          Future.delayed(
+                            const Duration(milliseconds: 800),
+                                () {
+                              _showAlertDialog(
                                 context,
-                                'Congratulations🎉, you guessed the number!');
-                          });
+                                'Congratulations🎉, you guessed the number!',
+                              );
+                            },
+                          );
                         });
                       } else {
                         print(PaDGame.game_guess);
@@ -115,8 +119,8 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                         for (int i = 0; i < listLength; i++) {
                           String char = guess[i].toUpperCase();
                           print(
-                              "the test: ${PaDGame.game_guess.contains(
-                                  char)}");
+                            "the test: ${PaDGame.game_guess.contains(char)}",
+                          );
                           if (PaDGame.game_guess.contains(char)) {
                             if (PaDGame.game_guess[i] == char) {
                               setState(() {
@@ -126,9 +130,8 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                                     .code = 1;
                                 correctNums++;
                                 correctPos++;
-                                print(
-                                    "correct Nums: " + correctNums.toString());
-                                print("correct Pos: " + correctPos.toString());
+                                print("correct Nums: " + correctNums.toString(),);
+                                print("correct Pos: " + correctPos.toString(),);
                               });
                             } else {
                               setState(() {
@@ -137,9 +140,8 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                                 widget.game.numberdleBoard[widget.game.rowId][i]
                                     .code = 1;
                                 correctNums++;
-                                print(
-                                    "correct Nums: " + correctNums.toString());
-                                print("correct Pos: " + correctPos.toString());
+                                print("correct Nums: " + correctNums.toString(),);
+                                print("correct Pos: " + correctPos.toString(),);
                               });
                             }
                           } else {
@@ -153,24 +155,35 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                         }
                         widget.game.rowId++;
                         widget.game.letterId = 0;
-
                         // Check if the user has failed and show an alert after 2 seconds
                         if (widget.game.rowId >= 10) {
                           Future.delayed(const Duration(seconds: 2), () {
-                            _showAlertDialog(context, 'Sorry, you failed to guess the number. Try again!');
-                          });
+                              _showAlertDialog(context, 'Sorry, you failed to guess the number. Try again!',
+                              );
+                            },
+                          );
                         }
                       }
-                    }else{
+                    } else {
                       setState(() {
                         PaDGame.game_message = "Input has repeating values. Try again.";
                       });
                     }
+
+                    // Reset correctNums and correctPos after processing the submit action
+                    setState(() {
+                      correctNums = 0;
+                      correctPos = 0;
+                    });
                   }
                 } else {
                   if (widget.game.letterId < 4) {
+                    // change to 4
                     print(widget.game.rowId);
-                    widget.game.insertWord(widget.game.letterId, Letter(e, 0));
+                    widget.game.insertWord(
+                      widget.game.letterId,
+                      Letter(e, 0),
+                    );
                     widget.game.letterId++;
                     setState(() {});
                   }
@@ -198,24 +211,23 @@ class _GameKeyboardState extends State<Game3Keyboard> {
   }
 }
 
-
 void _showAlertDialog(BuildContext context, String message) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title:const Text(
+        title: const Text(
           'NumeroWhiz Alert',
-          style: TextStyle(fontSize: 20.0), // Set the title font size
+          style: TextStyle(fontSize: 20.0),
         ),
         content: Text(
           message,
-          style: const TextStyle(fontSize: 18.0), // Set the content font size
+          style: const TextStyle(fontSize: 18.0),
         ),
         actions: [
           TextButton(
             onPressed: () {
-              Navigator.pop(context); // Close the alert
+              Navigator.pop(context);
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const Game3Screen()),
@@ -227,12 +239,12 @@ void _showAlertDialog(BuildContext context, String message) {
             ),
             child: const Text(
               'Play Again',
-              style: TextStyle(fontSize: 16.0), // Set the button font size
+              style: TextStyle(fontSize: 16.0),
             ),
           ),
           TextButton(
             onPressed: () {
-              Navigator.pop(context); // Close the alert
+              Navigator.pop(context);
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => MainMenu()),
@@ -244,7 +256,7 @@ void _showAlertDialog(BuildContext context, String message) {
             ),
             child: const Text(
               'Main Menu',
-              style: TextStyle(fontSize: 16.0), // Set the button font size
+              style: TextStyle(fontSize: 16.0),
             ),
           ),
         ],
@@ -252,4 +264,3 @@ void _showAlertDialog(BuildContext context, String message) {
     },
   );
 }
-
