@@ -53,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           Container(
             //add top margin here
-            decoration: const BoxDecoration(
+            decoration:  BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomCenter,

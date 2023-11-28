@@ -3,7 +3,7 @@ import '../screens/game2_screen.dart';
 import '../screens/mainmenu_screen.dart';
 import '../utils/game2_provider.dart';
 import 'game2_board.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 
 class Game2Keyboard extends StatefulWidget {
   Game2Keyboard(this.game, {Key? key}) : super(key: key);
@@ -15,9 +15,8 @@ class Game2Keyboard extends StatefulWidget {
 
 class _GameKeyboardState extends State<Game2Keyboard> {
   List<List<String>> rows = [
-    ["0", "1", "2", "3", "4"],
-    ["6", "7", "8", "9", "0"],
-    ["DELETE", "SUBMIT"],
+    ["0", "1", "2", "3", "4", "5"],
+    ["DEL", "6", "7", "8", "9", "SUBMIT"],
   ];
 
   @override
@@ -25,12 +24,15 @@ class _GameKeyboardState extends State<Game2Keyboard> {
     return Column(
       children: [
         Text(
-          NumberdleGame.game_message,
-          style: const TextStyle(color: Colors.white),
+            NumberdleGame.game_message,
+            style: GoogleFonts.archivoBlack(
+                fontSize: 12,
+                color: Color(0xFF9EB5F4),
+                letterSpacing: 0.2)
         ),
-        const SizedBox(height: 0.0),
-        Game2Board(widget.game),
         const SizedBox(height: 5.0),
+        Game2Board(widget.game),
+        const SizedBox(height: 20.0),
         for (List<String> row in rows)
           Container(
             //: EdgeInsets.only(bottom: 8.0),
@@ -43,16 +45,20 @@ class _GameKeyboardState extends State<Game2Keyboard> {
                     handleKeyboardTap(e);
                   },
                   child: Container(
-                    padding: const EdgeInsets.all(25.0),
+                    padding: e == "SUBMIT"
+                        ? const EdgeInsets.fromLTRB(5, 24, 5, 24)
+                        : e == "DEL"
+                        ? const EdgeInsets.fromLTRB(18, 24, 18, 24)
+                        : const EdgeInsets.all(20.0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8.0),
                       color: Colors.grey.shade300,
                     ),
                     child: Text(
                       "${e}",
-                      style: const TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
+                      style: GoogleFonts.lilitaOne(
+                        fontSize: e == "SUBMIT" || e == "DEL" ? 18.0 : 25.0,
+
                       ),
                     ),
                   ),
@@ -65,7 +71,7 @@ class _GameKeyboardState extends State<Game2Keyboard> {
   }
 
   void handleKeyboardTap(String value) {
-    if (value == "DELETE") {
+    if (value == "DEL") {
       if (widget.game.letterId > 0) {
         setState(() {
           widget.game.insertWord(widget.game.letterId - 1, Letter("", 0));
@@ -127,7 +133,7 @@ class _GameKeyboardState extends State<Game2Keyboard> {
             widget.game.letterId = 0;
 
             // Check if the user has failed and show an alert after 2 seconds
-            if (widget.game.rowId >= 4) {
+            if (widget.game.rowId >= 5) {
               Future.delayed(const Duration(seconds: 2), () {
                 _showAlertDialog(context, 'Sorry, you failed to guess the number. Try again!');
               });
@@ -157,55 +163,88 @@ void _showAlertDialog(BuildContext context, String message) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
-      return AlertDialog(
-        title:const Text(
-          'NumeroWhiz Alert',
-          style: TextStyle(fontSize: 20.0), // Set the title font size
+      return Theme(
+        data: ThemeData(
+          // Customize the background color of the AlertDialog
+          canvasColor: Colors.transparent, // Set to transparent
         ),
-        content: Text(
-          message,
-          style: const TextStyle(fontSize: 18.0), // Set the content font size
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context); // Close the alert
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const Game2Screen()),
-              );
-            },
-            style: TextButton.styleFrom(
-              backgroundColor: Colors.blue,
-              foregroundColor: Colors.white,
+        child: AlertDialog(
+          title: const Text(
+            'NumeroWhiz Alert',
+            style: TextStyle(fontSize: 20.0), // Set the title font size
+          ),
+          content: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Colors.blue,
+                  Colors.green,
+                ],
+              ),
             ),
-            child: const Text(
-              'Play Again',
-              style: TextStyle(fontSize: 16.0), // Set the button font size
+            child: SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(
+                  maxHeight: 170.0, // Adjust the max height as needed
+                ),
+                child: Column(
+                  children: [
+                    // Add an image here (replace 'your_image_asset_path' with the actual asset path)
+                    Image.asset(
+                      'assets/logo.png',
+                      height: 100, // Adjust the height as needed
+                      width: 100, // Adjust the width as needed
+                    ),
+                    const SizedBox(height: 16.0), // Add some space between the image and text
+                    Text(
+                      message,
+                      style: const TextStyle(fontSize: 18.0),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context); // Close the alert
-              Navigator.push(context, MaterialPageRoute(builder: (context) => MainMenu()),
-              );
-            },
-            style: TextButton.styleFrom(
-              backgroundColor: Colors.green,
-              foregroundColor: Colors.white,
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context); // Close the alert
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Game2Screen()),
+                );
+              },
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.blue,
+                foregroundColor: Colors.white,
+              ),
+              child: const Text(
+                'Play Again',
+                style: TextStyle(fontSize: 16.0),
+              ),
             ),
-            child: const Text(
-              'Main Menu',
-              style: TextStyle(fontSize: 16.0), // Set the button font size
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context); // Close the alert
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MainMenu()),
+                );
+              },
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.green,
+                foregroundColor: Colors.white,
+              ),
+              child: const Text(
+                'Main Menu',
+                style: TextStyle(fontSize: 16.0),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       );
     },
   );
 }
-
-
-
-
-
-
-

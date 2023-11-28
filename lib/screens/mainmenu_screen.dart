@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'game1_screen.dart';
 import 'how_to_play.dart';
 import 'game2_screen.dart';
 import 'game3_screen.dart';
@@ -11,10 +12,9 @@ class MainMenu extends StatelessWidget {
       initialRoute: '/mainmenu',
       routes: {
         '/mainmenu': (context) => MainMenuPage(),
-        '/howToPlay': (context) => howToPlay(),
-        // game 1
-        '/game2': (context) => const Game2Screen(),
-        '/game3': (context) => const Game3Screen(),
+        '/game1': (context) => Game1Screen(),
+        '/game2': (context) => Game2Screen(),
+        '/game3': (context) => Game3Screen(),
       },
     );
   }
@@ -71,7 +71,8 @@ class MainMenuPage extends StatelessWidget {
                     Navigator.pushNamed(context, '/game1');
                   },
                   style: OutlinedButton.styleFrom(
-                    side: const BorderSide(color: Color(0xFF689F38), width: 2.9),
+                    side:
+                        const BorderSide(color: Color(0xFF689F38), width: 2.9),
                     backgroundColor: Colors.transparent,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
@@ -100,8 +101,6 @@ class MainMenuPage extends StatelessWidget {
                   ),
                 ),
               ),
-
-
               const SizedBox(height: 20),
               Container(
                 width: 250,
@@ -112,7 +111,8 @@ class MainMenuPage extends StatelessWidget {
                     Navigator.pushNamed(context, '/game2');
                   },
                   style: OutlinedButton.styleFrom(
-                    side: const BorderSide(color: Color(0xFFFFC107), width: 2.9),
+                    side:
+                        const BorderSide(color: Color(0xFFFFC107), width: 2.9),
                     backgroundColor: Colors.transparent,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
@@ -142,7 +142,6 @@ class MainMenuPage extends StatelessWidget {
                   ),
                 ),
               ),
-
               const SizedBox(height: 20),
               Container(
                 width: 250,
@@ -153,7 +152,8 @@ class MainMenuPage extends StatelessWidget {
                     Navigator.pushNamed(context, '/game3');
                   },
                   style: OutlinedButton.styleFrom(
-                    side: const BorderSide(color: Color(0xFFFF3D00), width: 2.9),
+                    side:
+                        const BorderSide(color: Color(0xFFFF3D00), width: 2.9),
                     backgroundColor: Colors.transparent,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
@@ -183,8 +183,6 @@ class MainMenuPage extends StatelessWidget {
                   ),
                 ),
               ),
-
-
               const SizedBox(height: 70),
               Container(
                 width: 200,
@@ -195,7 +193,8 @@ class MainMenuPage extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => howToPlay()),
-                    );                  },
+                    );
+                  },
                   style: OutlinedButton.styleFrom(
                     side: const BorderSide(color: Colors.grey, width: 2.9),
                     backgroundColor: Colors.transparent,
@@ -218,8 +217,6 @@ class MainMenuPage extends StatelessWidget {
                   ),
                 ),
               ),
-
-
             ],
           ),
         ),

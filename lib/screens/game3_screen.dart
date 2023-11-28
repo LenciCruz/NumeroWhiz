@@ -25,7 +25,7 @@ class _GameScreenState extends State<Game3Screen> {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -42,16 +42,16 @@ class _GameScreenState extends State<Game3Screen> {
             Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 10.0),
+                  padding: EdgeInsets.only(left: 10.0),
                   child: IconButton(
-                    icon: const Icon(Icons.arrow_back, color: Colors.white, size: 32),
+                    icon: Icon(Icons.arrow_back, color: Colors.white, size: 32),
                     onPressed: () {
                       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainMenuPage()));
                     },
                   ),
                 ),
-                const SizedBox(width: 85.0),
-                const Text(
+                 SizedBox(width: 85.0),
+                 Text(
                   "Game 3",
                   style: TextStyle(
                     color: Colors.white,
@@ -61,7 +61,7 @@ class _GameScreenState extends State<Game3Screen> {
                 ),
               ],
             ),
-            const SizedBox(
+             SizedBox(
               height: 10.0,
             ),
             Game3Keyboard(_game),

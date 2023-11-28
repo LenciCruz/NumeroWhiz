@@ -1,45 +1,43 @@
+import 'package:NumeroWhiz/utils/game1_provider.dart';
 import 'package:flutter/material.dart';
-import '../utils/game2_provider.dart';
-import 'package:google_fonts/google_fonts.dart';
-class Game2Board extends StatefulWidget {
-  Game2Board(this.game, {Key? key}) : super(key: key);
-  NumberdleGame game;
+import '../utils/game1_provider.dart';
+
+class Game1Board extends StatefulWidget {
+  Game1Board(this.game, {Key? key}) : super(key: key);
+  HigherLowerGame game;
 
   @override
-  State<Game2Board> createState() => _GameBoardState();
+  State<Game1Board> createState() => _GameBoardState();
 }
 
-class _GameBoardState extends State<Game2Board> {
+class _GameBoardState extends State<Game1Board> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: widget.game.numberdleBoard
+      children: widget.game.hlBoard
           .map((e) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: e
             .map((e) => Container(
           padding: const EdgeInsets.all(16.0),
-          width: 70.0,
-          height: 70.0,
+          width: 77.0,
+          height: 65.0,
           margin: const EdgeInsets.symmetric(vertical: 8.0),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.0),
+            borderRadius: BorderRadius.circular(8.0),
             color: e.code == 0
-                ? Color(0xFF212121)
+                ? Colors.grey.shade800
                 : e.code == 1
-                ? Colors.green.shade400
-                : e.code == 2
-                ? Colors.amber.shade400
-                : Colors.red
-            ,
+                ? Colors.black54
+                : Colors.red,
           ),
           child: Center(
               child: Text(
                 e.letter!,
                 textAlign: TextAlign.center,
-                style: GoogleFonts.lilitaOne(
+                style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 30,
+                  fontSize: 22,
                   fontWeight: FontWeight.bold,
                 ),
               )),
