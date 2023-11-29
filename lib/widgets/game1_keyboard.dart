@@ -82,6 +82,7 @@ class _GameKeyboardState extends State<Game1Keyboard> {
         setState(() {
           widget.game.insertWord(widget.game.letterId - 1, Letter("", 0));
           widget.game.letterId--;
+          HigherLowerGame.game_message = "";
         });
       }
     } else if (value == "SUBMIT") {
