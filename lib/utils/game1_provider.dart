@@ -25,8 +25,8 @@ class HigherLowerGame {
 
   //Setting the Game Functon
   void passTry() {
-    rowId++;
-    letterId = 0;
+   rowId++;
+   letterId = 0;
   }
 
   static void initGame() {
@@ -39,20 +39,7 @@ class HigherLowerGame {
   void insertWord(index, word) {
     hlBoard[rowId][index] = word;
   }
-
-  //checking world
-  bool noRepeating(String input) {
-    for (int i = 0; i < input.length - 1; i++) {
-      for (int j = i + 1; j < input.length; j++) {
-        if (input[i] == input[j]) {
-          return false;
-        }
-      }
-    }
-    return true;
-  }
 }
-
 class Letter {
   String? letter;
   int code = 0;
