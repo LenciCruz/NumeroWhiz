@@ -7,6 +7,7 @@ import 'game3_board.dart';
 class Game3Keyboard extends StatefulWidget {
   Game3Keyboard(this.game, {Key? key}) : super(key: key);
   PaDGame game;
+
   @override
   State<Game3Keyboard> createState() => _GameKeyboardState();
 }
@@ -16,7 +17,6 @@ class _GameKeyboardState extends State<Game3Keyboard> {
   List row3 = ["DEL", "6", "7", "8", "9", "SUBMIT"];
   int correctNums = 0;
   int correctPos = 0;
-
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,9 @@ class _GameKeyboardState extends State<Game3Keyboard> {
         const SizedBox(
           height: 5.0,
         ),
-        Game3Board(widget.game,),
+        Game3Board(
+          widget.game,
+        ),
         const SizedBox(
           height: 20.0,
         ),
@@ -84,7 +86,6 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                     });
                   }
                 } else if (e == "SUBMIT") {
-
                   if (widget.game.letterId >= 4) {
                     String guess = widget.game.numberdleBoard[widget.game.rowId]
                         .map((e) => e.letter)
@@ -100,6 +101,24 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                             element.code = 1;
                             widget.game.setCorrectPos("4");
                             widget.game.setCorrectNums("4");
+                            if (widget.game.resultsPosId < 2) {
+                              print(widget.game.resultsPosId);
+                              print(widget.game.rowId);
+                              widget.game.insertPosResults(
+                                  widget.game.resultsPosId, Results("4"));
+                              //widget.game.insertNumsResults(widget.game.resultsPosId, Results("4"));
+                              widget.game.letterId++;
+                              setState(() {});
+                            }
+                            if (widget.game.resultNumsId < 2) {
+                              print(widget.game.resultNumsId);
+                              print(widget.game.rowId);
+                              widget.game.insertNumsResults(
+                                  widget.game.resultNumsId, ResultsNums("4"));
+                              //widget.game.insertNumsResults(widget.game.resultsPosId, Results("4"));
+                              widget.game.letterId++;
+                              setState(() {});
+                            }
                             print("correct Nums: " + correctNums.toString());
                             print("correct Pos: " + correctPos.toString());
                           });
@@ -107,7 +126,7 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                           // Check if the user has won and show an alert after 1.5 seconds
                           Future.delayed(
                             const Duration(milliseconds: 800),
-                                () {
+                            () {
                               _showAlertDialog(
                                 context,
                                 'Congratulations🎉, you guessed the number!',
@@ -132,11 +151,37 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                                     .code = 1;
                                 correctNums++;
                                 correctPos++;
-                                widget.game.setCorrectPos(correctPos.toString());
-                                widget.game.setCorrectNums(correctNums.toString());
-                                print("correct Nums: " + correctNums.toString(),);
-                                print("correct Pos: " + correctPos.toString(),);
+                                widget.game
+                                    .setCorrectPos(correctPos.toString());
+                                widget.game
+                                    .setCorrectNums(correctNums.toString());
+                                print(
+                                  "correct Nums: " + correctNums.toString(),
+                                );
+                                print(
+                                  "correct Pos: " + correctPos.toString(),
+                                );
                               });
+                              if (widget.game.resultsPosId < 2) {
+                                print(widget.game.resultsPosId);
+                                print(widget.game.rowId);
+                                widget.game.insertPosResults(
+                                    widget.game.resultsPosId,
+                                    Results(correctPos.toString()));
+                                // widget.game.insertNumsResults(widget.game.resultsPosId, Results(correctNums.toString()));
+                                widget.game.letterId++;
+                                setState(() {});
+                              }
+                              if (widget.game.resultNumsId < 2) {
+                                print(widget.game.resultNumsId);
+                                print(widget.game.rowId);
+                                widget.game.insertNumsResults(
+                                    widget.game.resultNumsId,
+                                    ResultsNums(correctNums.toString()));
+                                //widget.game.insertNumsResults(widget.game.resultsPosId, Results("4"));
+                                widget.game.letterId++;
+                                setState(() {});
+                              }
                             } else {
                               setState(() {
                                 PaDGame.game_message = "";
@@ -144,10 +189,29 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                                 widget.game.numberdleBoard[widget.game.rowId][i]
                                     .code = 1;
                                 correctNums++;
-                                widget.game.setCorrectPos(correctPos.toString());
-                                widget.game.setCorrectNums(correctNums.toString());
-                                print("correct Nums: " + correctNums.toString(),);
-                                print("correct Pos: " + correctPos.toString(),);
+                                widget.game
+                                    .setCorrectPos(correctPos.toString());
+                                widget.game
+                                    .setCorrectNums(correctNums.toString());
+                                if (widget.game.resultsPosId < 2) {
+                                  print(widget.game.resultsPosId);
+                                  print(widget.game.rowId);
+                                  widget.game.insertPosResults(
+                                      widget.game.resultsPosId,
+                                      Results(correctPos.toString()));
+                                  widget.game.insertNumsResults(
+                                      widget.game.resultsPosId,
+                                      ResultsNums(correctNums.toString()));
+                                  widget.game.letterId++;
+                                  setState(() {});
+                                }
+
+                                print(
+                                  "correct Nums: " + correctNums.toString(),
+                                );
+                                print(
+                                  "correct Pos: " + correctPos.toString(),
+                                );
                               });
                             }
                           } else {
@@ -163,16 +227,21 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                         widget.game.letterId = 0;
                         // Check if the user has failed and show an alert after 2 seconds
                         if (widget.game.rowId >= 10) {
-                          Future.delayed(const Duration(seconds: 2), () {
-                            _showAlertDialog(context, 'Sorry, you failed to guess the number. Try again!',
-                            );
-                          },
+                          Future.delayed(
+                            const Duration(seconds: 2),
+                            () {
+                              _showAlertDialog(
+                                context,
+                                'Sorry, you failed to guess the number. Try again!',
+                              );
+                            },
                           );
                         }
                       }
                     } else {
                       setState(() {
-                        PaDGame.game_message = "Input has repeating values. Try again.";
+                        PaDGame.game_message =
+                            "Input has repeating values. Try again.";
                       });
                     }
 

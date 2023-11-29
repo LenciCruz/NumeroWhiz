@@ -14,19 +14,12 @@ class _GameBoardState extends State<Game3Board> {
   @override
   Widget build(BuildContext context) {
     int row = 0;
-    String Pos1 = "";
-    String Pos2 = "";
-    String Pos3 = "";
-    String Pos4 = "";
-    String Pos5 = "";
-    String Pos6 = "";
-    String Pos7 = "";
-    String Pos8 = "";
-    String Pos9 = "";
-    String Pos10 = "";
 
-    createRow(String value, int rowIndex) {
+    createRow(int rowIndex) {
       int currentRow = widget.game.getCurrentRowId();
+      if (currentRow == 1) {
+        String firstPos = widget.game.getCorrectPos();
+      }
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -70,9 +63,8 @@ class _GameBoardState extends State<Game3Board> {
             ),
             child: Center(
               child: Text(
-                currentRow == rowIndex
-                    ? widget.game.getCorrectNums()
-                    : "", // Display empty for other rows
+                currentRow == rowIndex ? widget.game.getCorrectNums() : "",
+                // Display empty for other rows // Use widget.correctNums
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.white,
@@ -199,19 +191,76 @@ class _GameBoardState extends State<Game3Board> {
                 )
                 .toList(),
           ),
-          //const SizedBox(width: 5.0),
-          Column(
+          const SizedBox(width: 25.0),
+          Row(
             children: [
-              createRow(Pos1, 1),
-              createRow(Pos2, 2),
-              createRow(Pos3, 3),
-              createRow(Pos4, 4),
-              createRow(Pos5, 5),
-              createRow(Pos6, 6),
-              createRow(Pos7, 7),
-              createRow(Pos8, 8),
-              createRow(Pos9, 9),
-              createRow(Pos10, 10),
+              Column(
+                children: widget.game.resultsBoardPos
+                    .map(
+                      (e) => Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: e
+                            .map((e) => Container(
+                                  width: 45.0,
+                                  height: 45.0,
+                                  margin: const EdgeInsets.symmetric(
+                                    vertical: 3.0,
+                                    horizontal: 3.0,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    color: Colors.transparent,
+                                  ),
+                                  child: Center(
+                                      child: Text(
+                                    e.results!,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  )),
+                                ))
+                            .toList(),
+                      ),
+                    )
+                    .toList(),
+              ),
+              const SizedBox(width: 40.0),
+              Column(
+                children: widget.game.resultsBoardNums
+                    .map(
+                      (e) => Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: e
+                            .map((e) => Container(
+                                  width: 45.0,
+                                  height: 45.0,
+                                  margin: const EdgeInsets.symmetric(
+                                    vertical: 3.0,
+                                    horizontal: 3.0,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    color: Colors.transparent,
+                                  ),
+                                  child: Center(
+                                      child: Text(
+                                    e.resultsNums!,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  )),
+                                ))
+                            .toList(),
+                      ),
+                    )
+                    .toList(),
+              ),
             ],
           )
         ])
