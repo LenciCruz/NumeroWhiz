@@ -9,6 +9,7 @@ class HigherLowerGame {
   static String game_message = "";
   static String game_guess = "";
   static bool gameOver = false;
+
   //setting the game row
   static List<Letter> hlRow = List.generate(
     2,
@@ -23,7 +24,7 @@ class HigherLowerGame {
             (index) => Letter("", 0),
       ));
 
-  //Setting the Game Functon
+  //Setting the Game Function
   void passTry() {
    rowId++;
    letterId = 0;
@@ -31,7 +32,6 @@ class HigherLowerGame {
 
   static void initGame() {
     List<int> digits = List.generate(10, (index) => index)..shuffle();
-//    game_guess = "${digits[0]}${digits[1]}${digits[2]}${digits[3]}${digits[4]}";
     game_guess = "${digits[0]}${digits[1]}";
   }
 

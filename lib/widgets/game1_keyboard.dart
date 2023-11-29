@@ -37,7 +37,6 @@ class _GameKeyboardState extends State<Game1Keyboard> {
         const SizedBox(height: 20.0),
         for (List<String> row in rows)
           Container(
-            //: EdgeInsets.only(bottom: 8.0),
             margin: const EdgeInsets.symmetric(vertical: 8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -99,7 +98,7 @@ class _GameKeyboardState extends State<Game1Keyboard> {
           HigherLowerGame.game_message = "";
           setState(() {}); // Trigger a rebuild
 
-          // Check if the user has won and show an alert after 1.5 seconds
+          // Check if the user has won and show an alert after delay
           Future.delayed(const Duration(milliseconds: 500), () {
             _showAlertDialogWin(
                 context, 'Congratulations! You have guessed the number correctly by ${tries} attempts!');
@@ -122,7 +121,6 @@ class _GameKeyboardState extends State<Game1Keyboard> {
           }
           print(HigherLowerGame.game_guess);
           widget.game.rowId = 0;
-          //widget.game.letterId = 0;
         }
       }
     } else {

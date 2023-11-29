@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'mainmenu_screen.dart';
 
 void main() {
   runApp(htpPage());
@@ -30,7 +29,6 @@ class _MyHomePageState extends State<howToPlay> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      // This allows the body to extend behind the app bar
       appBar: AppBar(
         title: Text(
           'How To Play',
@@ -52,7 +50,6 @@ class _MyHomePageState extends State<howToPlay> {
       body: Stack(
         children: [
           Container(
-            //add top margin here
             decoration:  BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
@@ -69,7 +66,6 @@ class _MyHomePageState extends State<howToPlay> {
             children: [
               Padding(
                 padding: EdgeInsets.fromLTRB(8, 50, 8, 8),
-                //padding: const EdgeInsets.all(8.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -85,9 +81,8 @@ class _MyHomePageState extends State<howToPlay> {
                         children: [
                           Image.asset(
                             'assets/higherlower.png',
-                            // replace with your image asset
-                            width: 200, // set the width of the image
-                            height: 200, // set the height of the image
+                            width: 200,
+                            height: 200,
                           ),
                           SizedBox(height: 20),
                           Text(
@@ -139,9 +134,8 @@ class _MyHomePageState extends State<howToPlay> {
                         children: [
                           Image.asset(
                             'assets/numberdle.png',
-                            // replace with your image asset
-                            width: 200, // set the width of the image
-                            height: 200, // set the height of the image
+                            width: 200,
+                            height: 200,
                           ),
                           SizedBox(height: 20),
                           Text(
@@ -193,9 +187,8 @@ class _MyHomePageState extends State<howToPlay> {
                         children: [
                           Image.asset(
                             'assets/peekadigit.png',
-                            // replace with your image asset
-                            width: 200, // set the width of the image
-                            height: 200, // set the height of the image
+                            width: 200,
+                            height: 200,
                           ),
                           SizedBox(height: 20),
                           Text(

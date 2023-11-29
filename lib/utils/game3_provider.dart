@@ -13,18 +13,18 @@ class PaDGame {
   static bool gameOver = false;
 
   //setting the game row
-  static List<Letter> numberdleRow = List.generate(
+  static List<Letter> padRow = List.generate(
     10,
-    (index) => Letter("", 0),
+        (index) => Letter("", 0),
   );
 
   //Setting the gameBoard
-  List<List<Letter>> numberdleBoard = List.generate(
+  List<List<Letter>> padBoard = List.generate(
       10,
-      (index) => List.generate(
-            4,
+          (index) => List.generate(
+        4,
             (index) => Letter("", 0),
-          ));
+      ));
 
   //Setting the Game Function
   void passTry() {
@@ -39,33 +39,33 @@ class PaDGame {
 
   static List<Letter> resultsRowPos = List.generate(
     10,
-    (index) => Letter("", 0),
+        (index) => Letter("", 0),
   );
 
   //Setting the gameBoard
   List<List<Results>> resultsBoardPos = List.generate(
       10,
-      (index) => List.generate(
-            1,
+          (index) => List.generate(
+        1,
             (index) => Results(""),
-          ));
+      ));
 
   static List<Letter> resultsRowNums = List.generate(
     10,
-    (index) => Letter("", 0),
+        (index) => Letter("", 0),
   );
 
   //Setting the gameBoard
   List<List<ResultsNums>> resultsBoardNums = List.generate(
       10,
-      (index) => List.generate(
-            1,
+          (index) => List.generate(
+        1,
             (index) => ResultsNums(""),
-          ));
+      ));
 
   //Setting the game insertion
   void insertWord(index, word) {
-    numberdleBoard[rowId][index] = word;
+    padBoard[rowId][index] = word;
   }
 
   void insertPosResults(index, word) {

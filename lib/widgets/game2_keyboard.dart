@@ -36,7 +36,6 @@ class _GameKeyboardState extends State<Game2Keyboard> {
         const SizedBox(height: 20.0),
         for (List<String> row in rows)
           Container(
-            //: EdgeInsets.only(bottom: 8.0),
             margin: const EdgeInsets.symmetric(vertical: 8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -158,107 +157,6 @@ class _GameKeyboardState extends State<Game2Keyboard> {
   }
 
 }
-
-/*
-void _showAlertDialog(BuildContext context, String message) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return Theme(
-        data: ThemeData(
-          // Customize the background color of the AlertDialog
-          canvasColor: Colors.transparent, // Set to transparent
-        ),
-        child: AlertDialog(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Colors.blue,
-                Colors.green,
-              ],
-            ),
-          ),
-          title: const Text(
-            'NumeroWhiz Alert',
-            style: TextStyle(fontSize: 20.0), // Set the title font size
-          ),
-          content: Container(
-            /*decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Colors.blue,
-                  Colors.green,
-                ],
-              ),
-            ),*/
-            child: SingleChildScrollView(
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(
-                  maxHeight: 170.0, // Adjust the max height as needed
-                ),
-                child: Column(
-                  children: [
-                    // Add an image here (replace 'your_image_asset_path' with the actual asset path)
-                    Image.asset(
-                      'assets/logo.png',
-                      height: 100, // Adjust the height as needed
-                      width: 100, // Adjust the width as needed
-                    ),
-                    const SizedBox(height: 16.0), // Add some space between the image and text
-                    Text(
-                      message,
-                      style: const TextStyle(fontSize: 18.0),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context); // Close the alert
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Game2Screen()),
-                );
-              },
-              style: TextButton.styleFrom(
-                backgroundColor: Colors.blue,
-                foregroundColor: Colors.white,
-              ),
-              child: const Text(
-                'Play Again',
-                style: TextStyle(fontSize: 16.0),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context); // Close the alert
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => MainMenu()),
-                );
-              },
-              style: TextButton.styleFrom(
-                backgroundColor: Colors.green,
-                foregroundColor: Colors.white,
-              ),
-              child: const Text(
-                'Main Menu',
-                style: TextStyle(fontSize: 16.0),
-              ),
-            ),
-          ],
-        ),
-      );
-    },
-  );
-}*/
 
 class CustomGradientDialogWin extends StatelessWidget {
   final String title;

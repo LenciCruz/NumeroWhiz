@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'game1_screen.dart';
 import 'how_to_play.dart';
+import 'game1_screen.dart';
 import 'game2_screen.dart';
 import 'game3_screen.dart';
 import 'package:google_fonts/google_fonts.dart';

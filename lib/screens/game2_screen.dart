@@ -29,7 +29,7 @@ class _Game2ScreenState extends State<Game2Screen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white, size: 25),
+          icon: const Icon(Icons.arrow_back, color: Colors.white, size: 35),
           onPressed: () {
             Navigator.pop(context);
             Navigator.push(
@@ -54,19 +54,19 @@ class _Game2ScreenState extends State<Game2Screen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text('MEDIUM', // Add your top text here
+            Text('MEDIUM',
                 style: GoogleFonts.archivoBlack(
                     fontSize: 15,
                     color: Color(0xFFA5D7E8),
                     letterSpacing: 10.0)),
             Text(
-              'Numberdle', // Add your top text here
+              'Numberdle',
               style: GoogleFonts.lilitaOne(
                 fontSize: 45,
                 color: Color(0xFFD9D9D9),
               ),
             ),
-            Text('NumeroWhiz', // Add your top text here
+            Text('NumeroWhiz',
                 style: GoogleFonts.archivoBlack(
                     fontSize: 15,
                     color: Color(0xFFA5D7E8),

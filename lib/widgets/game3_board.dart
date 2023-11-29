@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../utils/game3_provider.dart';
 import '../widgets/game3_keyboard.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Game3Board extends StatefulWidget {
   Game3Board(this.game, {Key? key}) : super(key: key);
@@ -83,112 +84,102 @@ class _GameBoardState extends State<Game3Board> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0.0),
-              child: const Text(
-                "Correct",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-            Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0.0),
-              child: const Text(
-                "Correct",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ],
-        ),
-        Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            SizedBox(width: 75.0),
             Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-              child: const Text(
+              //padding:
+              //const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              child: Text(
                 "Your Guesses",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+                style: GoogleFonts.archivoNarrow(
+                  fontSize: 16,
                   color: Colors.white,
                 ),
               ),
             ),
-            const Spacer(),
+            //const Spacer(),
+            SizedBox(width: 75.0),
             Container(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-              child: const Text(
-                "Position",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
+              const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Correct",
+                    style: GoogleFonts.archivoNarrow(
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                    "Position",
+                    style: GoogleFonts.archivoNarrow(
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
               ),
             ),
             Container(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
-              child: const Text(
-                "Number",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
+              const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Correct",
+                    style: GoogleFonts.archivoNarrow(
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                    "Number",
+                    style: GoogleFonts.archivoNarrow(
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
         ),
         Row(children: [
+          SizedBox(width: 15.0),
           Column(
-            children: widget.game.numberdleBoard
+            children: widget.game.padBoard
                 .map(
                   (e) => Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: e
-                        .map((e) => Container(
-                              width: 45.0,
-                              height: 45.0,
-                              margin: const EdgeInsets.symmetric(
-                                vertical: 3.0,
-                                horizontal: 3.0,
-                              ),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8.0),
-                                color: e.code == 0
-                                    ? Color(0xFF212121)
-                                    : e.code == 1
-                                        ? Colors.black54
-                                        : Colors.red,
-                              ),
-                              child: Center(
-                                  child: Text(
-                                e.letter!,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              )),
-                            ))
-                        .toList(),
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: e
+                    .map((e) => Container(
+                  width: 45.0,
+                  height: 45.0,
+                  margin: const EdgeInsets.symmetric(
+                    vertical: 3.0,
+                    horizontal: 5.0,
                   ),
-                )
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8.0),
+                      color: Color(0xFF212121)),
+                  child: Center(
+                      child: Text(
+                        e.letter!,
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.lilitaOne(
+                          color: Colors.white,
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )),
+                ))
+                    .toList(),
+              ),
+            )
                 .toList(),
           ),
           const SizedBox(width: 25.0),
@@ -198,67 +189,67 @@ class _GameBoardState extends State<Game3Board> {
                 children: widget.game.resultsBoardPos
                     .map(
                       (e) => Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: e
-                            .map((e) => Container(
-                                  width: 45.0,
-                                  height: 45.0,
-                                  margin: const EdgeInsets.symmetric(
-                                    vertical: 3.0,
-                                    horizontal: 3.0,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    color: Colors.transparent,
-                                  ),
-                                  child: Center(
-                                      child: Text(
-                                    e.results!,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  )),
-                                ))
-                            .toList(),
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: e
+                        .map((e) => Container(
+                      width: 45.0,
+                      height: 45.0,
+                      margin: const EdgeInsets.symmetric(
+                        vertical: 3.0,
+                        horizontal: 3.0,
                       ),
-                    )
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8.0),
+                        color: Colors.transparent,
+                      ),
+                      child: Center(
+                          child: Text(
+                            e.results!,
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.lilitaOne(
+                              color: Colors.white,
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )),
+                    ))
+                        .toList(),
+                  ),
+                )
                     .toList(),
               ),
-              const SizedBox(width: 40.0),
+              const SizedBox(width: 20.0),
               Column(
                 children: widget.game.resultsBoardNums
                     .map(
                       (e) => Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: e
-                            .map((e) => Container(
-                                  width: 45.0,
-                                  height: 45.0,
-                                  margin: const EdgeInsets.symmetric(
-                                    vertical: 3.0,
-                                    horizontal: 3.0,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    color: Colors.transparent,
-                                  ),
-                                  child: Center(
-                                      child: Text(
-                                    e.resultsNums!,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  )),
-                                ))
-                            .toList(),
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: e
+                        .map((e) => Container(
+                      width: 45.0,
+                      height: 45.0,
+                      margin: const EdgeInsets.symmetric(
+                        vertical: 3.0,
+                        horizontal: 3.0,
                       ),
-                    )
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8.0),
+                        color: Colors.transparent,
+                      ),
+                      child: Center(
+                          child: Text(
+                            e.resultsNums!,
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.lilitaOne(
+                              color: Colors.white,
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )),
+                    ))
+                        .toList(),
+                  ),
+                )
                     .toList(),
               ),
             ],
