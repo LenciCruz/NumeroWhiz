@@ -47,11 +47,15 @@ class _GameScreenState extends State<Game3Screen> {
                     icon: Icon(Icons.arrow_back, color: Colors.white, size: 32),
                     onPressed: () {
                       Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MainMenu()),
+                      );
                     },
                   ),
                 ),
-                 SizedBox(width: 85.0),
-                 Text(
+                SizedBox(width: 85.0),
+                Text(
                   "Game 3",
                   style: TextStyle(
                     color: Colors.white,
@@ -61,7 +65,7 @@ class _GameScreenState extends State<Game3Screen> {
                 ),
               ],
             ),
-             SizedBox(
+            SizedBox(
               height: 10.0,
             ),
             Game3Keyboard(_game),

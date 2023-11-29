@@ -5,6 +5,8 @@ class PaDGame {
   //setting the game variables
   int rowId = 0;
   int letterId = 0;
+  String correctPos = "";
+  String correctNums = "";
   static String game_message = "";
   static String game_guess = "";
   static bool gameOver = false;
@@ -18,7 +20,7 @@ class PaDGame {
   List<List<Letter>> numberdleBoard = List.generate(
       10,
           (index) => List.generate(
-            4,
+        4,
             (index) => Letter("", 0),
       ));
   //Setting the Game Function
@@ -48,6 +50,24 @@ class PaDGame {
     }
     return true;
   }
+  int getCurrentRowId() {
+    return rowId;
+  }
+
+
+  String getCorrectPos() {
+    return correctPos;
+  }
+  String getCorrectNums() {
+    return correctNums;
+  }
+  void setCorrectPos(String value) {
+    correctPos = value;
+  }
+
+  void setCorrectNums(String value) {
+    correctNums = value;
+  }
 }
 
 class Letter {
@@ -56,3 +76,5 @@ class Letter {
 
   Letter(this.letter, this.code);
 }
+
+

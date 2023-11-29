@@ -17,8 +17,10 @@ class _GameKeyboardState extends State<Game3Keyboard> {
   int correctNums = 0;
   int correctPos = 0;
 
+
   @override
   Widget build(BuildContext context) {
+    // setting the game rules
     return Column(
       children: [
         Text(
@@ -28,7 +30,7 @@ class _GameKeyboardState extends State<Game3Keyboard> {
         const SizedBox(
           height: 5.0,
         ),
-        Game3Board(widget.game,correctNums, correctPos),
+        Game3Board(widget.game,),
         const SizedBox(
           height: 20.0,
         ),
@@ -82,7 +84,7 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                     });
                   }
                 } else if (e == "SUBMIT") {
-                  // setting the game rules
+
                   if (widget.game.letterId >= 4) {
                     String guess = widget.game.numberdleBoard[widget.game.rowId]
                         .map((e) => e.letter)
@@ -96,8 +98,8 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                           widget.game.numberdleBoard[widget.game.rowId]
                               .forEach((element) {
                             element.code = 1;
-                            correctNums = 4;
-                            correctPos = 4;
+                            widget.game.setCorrectPos("4");
+                            widget.game.setCorrectNums("4");
                             print("correct Nums: " + correctNums.toString());
                             print("correct Pos: " + correctPos.toString());
                           });
@@ -130,6 +132,8 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                                     .code = 1;
                                 correctNums++;
                                 correctPos++;
+                                widget.game.setCorrectPos(correctPos.toString());
+                                widget.game.setCorrectNums(correctNums.toString());
                                 print("correct Nums: " + correctNums.toString(),);
                                 print("correct Pos: " + correctPos.toString(),);
                               });
@@ -140,6 +144,8 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                                 widget.game.numberdleBoard[widget.game.rowId][i]
                                     .code = 1;
                                 correctNums++;
+                                widget.game.setCorrectPos(correctPos.toString());
+                                widget.game.setCorrectNums(correctNums.toString());
                                 print("correct Nums: " + correctNums.toString(),);
                                 print("correct Pos: " + correctPos.toString(),);
                               });
@@ -158,9 +164,9 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                         // Check if the user has failed and show an alert after 2 seconds
                         if (widget.game.rowId >= 10) {
                           Future.delayed(const Duration(seconds: 2), () {
-                              _showAlertDialog(context, 'Sorry, you failed to guess the number. Try again!',
-                              );
-                            },
+                            _showAlertDialog(context, 'Sorry, you failed to guess the number. Try again!',
+                            );
+                          },
                           );
                         }
                       }
@@ -213,7 +219,6 @@ class _GameKeyboardState extends State<Game3Keyboard> {
 
 void _showAlertDialog(BuildContext context, String message) {
   showDialog(
-    barrierDismissible: false,
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
