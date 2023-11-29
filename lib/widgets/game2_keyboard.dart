@@ -23,6 +23,7 @@ class _GameKeyboardState extends State<Game2Keyboard> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        const SizedBox(height: 15.0),
         Text(
             NumberdleGame.game_message,
             style: GoogleFonts.archivoBlack(
@@ -30,7 +31,7 @@ class _GameKeyboardState extends State<Game2Keyboard> {
                 color: Color(0xFF9EB5F4),
                 letterSpacing: 0.2)
         ),
-        const SizedBox(height: 5.0),
+        const SizedBox(height: 15.0),
         Game2Board(widget.game),
         const SizedBox(height: 20.0),
         for (List<String> row in rows)
@@ -97,8 +98,8 @@ class _GameKeyboardState extends State<Game2Keyboard> {
             });
             // Check if the user has won and show an alert after 1.5 seconds
             Future.delayed(const Duration(milliseconds: 800), () {
-              _showAlertDialog(
-                  context, 'Congratulations🎉, you guessed the number!');
+              _showAlertDialogWin(
+                  context, 'Congratulations! You have guessed the number correctly!');
             });
 
           } else {
@@ -135,7 +136,7 @@ class _GameKeyboardState extends State<Game2Keyboard> {
             // Check if the user has failed and show an alert after 2 seconds
             if (widget.game.rowId >= 5) {
               Future.delayed(const Duration(seconds: 2), () {
-                _showAlertDialog(context, 'Sorry, you failed to guess the number. Try again!');
+                _showAlertDialogLose(context, 'Uh oh! You have exceeded the amount of trials! Nice Try!');
               });
             }
           }
@@ -158,10 +159,9 @@ class _GameKeyboardState extends State<Game2Keyboard> {
 
 }
 
-
+/*
 void _showAlertDialog(BuildContext context, String message) {
   showDialog(
-    barrierDismissible: false,
     context: context,
     builder: (BuildContext context) {
       return Theme(
@@ -170,12 +170,22 @@ void _showAlertDialog(BuildContext context, String message) {
           canvasColor: Colors.transparent, // Set to transparent
         ),
         child: AlertDialog(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Colors.blue,
+                Colors.green,
+              ],
+            ),
+          ),
           title: const Text(
             'NumeroWhiz Alert',
             style: TextStyle(fontSize: 20.0), // Set the title font size
           ),
           content: Container(
-            decoration: BoxDecoration(
+            /*decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -184,7 +194,7 @@ void _showAlertDialog(BuildContext context, String message) {
                   Colors.green,
                 ],
               ),
-            ),
+            ),*/
             child: SingleChildScrollView(
               child: ConstrainedBox(
                 constraints: const BoxConstraints(
@@ -245,6 +255,248 @@ void _showAlertDialog(BuildContext context, String message) {
             ),
           ],
         ),
+      );
+    },
+  );
+}*/
+
+class CustomGradientDialogWin extends StatelessWidget {
+  final String title;
+  final String message;
+
+  const CustomGradientDialogWin({required this.title, required this.message});
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16.0),
+      ),
+      elevation: 0,
+      backgroundColor: Colors.transparent,
+      child: contentBox(context),
+    );
+  }
+
+  contentBox(context) {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [Color(0xFFC3DAAF), Color(0xFF96C969)],
+        ),
+        borderRadius: BorderRadius.circular(16.0),
+        border: Border.all(color: Color(0xFF689F38), width: 2.0),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            padding: EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                SizedBox(height: 8.0),
+                Image.asset(
+                  'assets/logo.png',
+                  height: 100,
+                  width: 100,
+                ),
+                SizedBox(height: 8.0),
+                Container(
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.fromLTRB(15, 15, 15, 0),
+                  child: Text(
+                    message,
+                    style: GoogleFonts.archivoNarrow(
+                      fontSize: 20.0,
+                      color: Colors.white,
+                      letterSpacing: 1.0,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 16.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Game2Screen()),
+                  );
+                },
+                style: TextButton.styleFrom(
+                  backgroundColor: Color(0xFF4E7D26),
+                  foregroundColor: Colors.white,
+                ),
+                child: Text(
+                  'Play Again',
+                  style: GoogleFonts.archivoNarrow(fontSize: 16.0, letterSpacing: 1.0),
+                ),
+              ),
+              SizedBox(width: 16.0),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MainMenu()),
+                  );
+                },
+                style: TextButton.styleFrom(
+                  backgroundColor: Color(0xFF4E7D26),
+                  foregroundColor: Colors.white,
+                ),
+                child: Text(
+                  'Main Menu',
+                  style: GoogleFonts.archivoNarrow(fontSize: 16.0, letterSpacing: 1.0),
+                ),
+              ),
+              SizedBox(height: 100.0),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+void _showAlertDialogWin(BuildContext context, String message) {
+  showDialog(
+    barrierDismissible: false,
+    context: context,
+    builder: (BuildContext context) {
+      return CustomGradientDialogWin(
+        title: 'NumeroWhiz Alert',
+        message: message,
+      );
+    },
+  );
+}
+
+
+
+class CustomGradientDialogLose extends StatelessWidget {
+  final String title;
+  final String message;
+
+  const CustomGradientDialogLose({required this.title, required this.message});
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16.0),
+      ),
+      elevation: 0,
+      backgroundColor: Colors.transparent,
+      child: contentBox(context),
+    );
+  }
+
+  contentBox(context) {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [Color(0xFFE68B8B), Color(0xFFB12626)],
+        ),
+        borderRadius: BorderRadius.circular(16.0),
+        border: Border.all(color: Color(0xFFA00707), width: 2.0),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            padding: EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                SizedBox(height: 8.0),
+                Image.asset(
+                  'assets/logo.png',
+                  height: 100,
+                  width: 100,
+                ),
+                SizedBox(height: 8.0),
+                Container(
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.fromLTRB(15, 15, 15, 0),
+                  child: Text(
+                    message,
+                    style: GoogleFonts.archivoNarrow(
+                        fontSize: 20.0,
+                        color: Colors.white,
+                        letterSpacing: 1.0
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 16.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Game2Screen()),
+                  );
+                },
+                style: TextButton.styleFrom(
+                  backgroundColor: Color(0xFF7F0C0C),
+                  foregroundColor: Colors.white,
+                ),
+                child: Text(
+                  'Play Again',
+                  style: GoogleFonts.archivoNarrow(fontSize: 16.0, letterSpacing: 1.0),
+                ),
+              ),
+              SizedBox(width: 16.0),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MainMenu()),
+                  );
+                },
+                style: TextButton.styleFrom(
+                  backgroundColor: Color(0xFF7F0C0C),
+                  foregroundColor: Colors.white,
+                ),
+                child: Text(
+                  'Main Menu',
+                  style: GoogleFonts.archivoNarrow(fontSize: 16.0, letterSpacing: 1.0),
+                ),
+              ),
+              SizedBox(height: 100.0),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+void _showAlertDialogLose(BuildContext context, String message) {
+  showDialog(
+    barrierDismissible: false,
+    context: context,
+    builder: (BuildContext context) {
+      return CustomGradientDialogLose(
+        title: 'NumeroWhiz Alert',
+        message: message,
       );
     },
   );
