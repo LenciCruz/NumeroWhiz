@@ -213,6 +213,7 @@ class _GameKeyboardState extends State<Game3Keyboard> {
 
 void _showAlertDialog(BuildContext context, String message) {
   showDialog(
+    barrierDismissible: false,
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(

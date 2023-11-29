@@ -161,6 +161,7 @@ class _GameKeyboardState extends State<Game2Keyboard> {
 
 void _showAlertDialog(BuildContext context, String message) {
   showDialog(
+    barrierDismissible: false,
     context: context,
     builder: (BuildContext context) {
       return Theme(
