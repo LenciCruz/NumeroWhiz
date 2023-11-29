@@ -46,7 +46,7 @@ class _GameScreenState extends State<Game3Screen> {
                   child: IconButton(
                     icon: Icon(Icons.arrow_back, color: Colors.white, size: 32),
                     onPressed: () {
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainMenuPage()));
+                      Navigator.pop(context);
                     },
                   ),
                 ),

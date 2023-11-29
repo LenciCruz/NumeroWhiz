@@ -12,9 +12,10 @@ class MainMenu extends StatelessWidget {
       initialRoute: '/mainmenu',
       routes: {
         '/mainmenu': (context) => MainMenuPage(),
-        '/game1': (context) => Game1Screen(),
-        '/game2': (context) => Game2Screen(),
-        '/game3': (context) => Game3Screen(),
+        '/howToPlay': (context) => new howToPlay(),
+        '/game1': (context) => new Game1Screen(),
+        '/game2': (context) => new Game2Screen(),
+        '/game3': (context) => new Game3Screen(),
       },
     );
   }
@@ -190,10 +191,7 @@ class MainMenuPage extends StatelessWidget {
                 child: OutlinedButton(
                   onPressed: () {
                     // Navigate to how to play page
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => howToPlay()),
-                    );
+                    Navigator.pushNamed(context, '/howToPlay');
                   },
                   style: OutlinedButton.styleFrom(
                     side: const BorderSide(color: Colors.grey, width: 2.9),

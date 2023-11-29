@@ -31,8 +31,7 @@ class _Game2ScreenState extends State<Game2Screen> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white, size: 25),
           onPressed: () {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => MainMenuPage()));
+            Navigator.pop(context);
           },
         ),
       ),

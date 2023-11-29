@@ -6,26 +6,26 @@ void main() {
   runApp(howToPlay());
 }
 
-class howToPlay extends StatelessWidget {
+class htpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'scrollablelistview',
       theme: ThemeData(),
-      home: MyHomePage(),
+      home: howToPlay(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+class howToPlay extends StatefulWidget {
+  const howToPlay({Key? key}) : super(key: key);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<howToPlay> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<howToPlay> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainMenuPage()));
+            Navigator.pop(context);
           },
         ),
         centerTitle: true,
