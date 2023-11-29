@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'mainmenu_screen.dart';
 
 void main() {
-  runApp(howToPlay());
+  runApp(htpPage());
 }
 
 class htpPage extends StatelessWidget {
