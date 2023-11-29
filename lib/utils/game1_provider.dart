@@ -33,7 +33,6 @@ class HigherLowerGame {
     List<int> digits = List.generate(10, (index) => index)..shuffle();
 //    game_guess = "${digits[0]}${digits[1]}${digits[2]}${digits[3]}${digits[4]}";
     game_guess = "${digits[0]}${digits[1]}";
-
   }
 
   //Setting the game insertion

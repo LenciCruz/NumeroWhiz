@@ -6,7 +6,6 @@ import 'game1_board.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
-
 class Game1Keyboard extends StatefulWidget {
   Game1Keyboard(this.game, {Key? key}) : super(key: key);
   HigherLowerGame game;
@@ -20,6 +19,7 @@ class _GameKeyboardState extends State<Game1Keyboard> {
     ["0", "1", "2", "3", "4", "5"],
     ["DEL", "6", "7", "8", "9", "SUBMIT"],
   ];
+  int tries = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -28,11 +28,11 @@ class _GameKeyboardState extends State<Game1Keyboard> {
         Text(
             HigherLowerGame.game_message,
             style: GoogleFonts.archivoBlack(
-                fontSize: 12,
+                fontSize: 25,
                 color: Color(0xFF9EB5F4),
                 letterSpacing: 0.2)
         ),
-        const SizedBox(height: 5.0),
+        const SizedBox(height: 100.0),
         Game1Board(widget.game),
         const SizedBox(height: 20.0),
         for (List<String> row in rows)
@@ -71,8 +71,9 @@ class _GameKeyboardState extends State<Game1Keyboard> {
     );
   }
 
+
   void handleKeyboardTap(String value) {
-    if (value == "DELETE") {
+    if (value == "DEL") {
       if (widget.game.letterId > 0) {
         setState(() {
           widget.game.insertWord(widget.game.letterId - 1, Letter("", 0));
@@ -80,6 +81,8 @@ class _GameKeyboardState extends State<Game1Keyboard> {
         });
       }
     } else if (value == "SUBMIT") {
+      tries ++;
+
       // setting the game rules
       if (widget.game.letterId >= 2) {
         String guess = widget.game.hlBoard[widget.game.rowId]
@@ -87,58 +90,40 @@ class _GameKeyboardState extends State<Game1Keyboard> {
             .join();
         print(guess);
         print(HigherLowerGame.game_guess == guess);
-        //checkword
         if (guess == HigherLowerGame.game_guess) {
           setState(() {
             widget.game.hlBoard[widget.game.rowId].forEach((element) {
               element.code = 1;
             });
           });
+          HigherLowerGame.game_message = "";
+          setState(() {}); // Trigger a rebuild
+
           // Check if the user has won and show an alert after 1.5 seconds
           Future.delayed(const Duration(milliseconds: 500), () {
-            _showAlertDialog(
-                context, 'Congratulations🎉, you guessed the number!');
+            _showAlertDialogWin(
+                context, 'Congratulations! You have guessed the number correctly by ${tries} attempts!');
           });
         }
         else {
           if(int.parse(guess) > int.parse(HigherLowerGame.game_guess)) {
             setState(() {
-              HigherLowerGame.game_message = "LOWER";
+              HigherLowerGame.game_message = "GUESS LOWER";
             });
             print('LOWER');
 
           }
           else if(int.parse(guess) < int.parse(HigherLowerGame.game_guess)) {
             setState(() {
-              HigherLowerGame.game_message = "HIGHER";
+              HigherLowerGame.game_message = "GUESS HIGHER";
             });
             print('HIGHER');
+
           }
           print(HigherLowerGame.game_guess);
-          /*   int listLength = guess.length;
-            for (int i = 0; i < listLength; i++) {
-              String char = guess[i].toUpperCase();
-              print("the test: ${HigherLowerGame.game_guess.contains(char)}");
-                if (HigherLowerGame.game_guess[i] == char) {
-                  setState(() {
-                    HigherLowerGame.game_message = "";
-                    print(char);
-                    widget.game.numberdleBoard[widget.game.rowId][i].code = 1;
-                  });
-                } else {
-                  setState(() {
-                    HigherLowerGame.game_message = "";
-                    print(char);
-                    widget.game.numberdleBoard[widget.game.rowId][i].code = 2;
-                  });
-                }
-
-            }
-            */
           widget.game.rowId = 0;
-          widget.game.letterId = 0;
+          //widget.game.letterId = 0;
         }
-
       }
     } else {
       if (widget.game.letterId < 2) {
@@ -150,62 +135,122 @@ class _GameKeyboardState extends State<Game1Keyboard> {
   }
 
 }
+class CustomGradientDialogWin extends StatelessWidget {
+  final String title;
+  final String message;
 
+  const CustomGradientDialogWin({required this.title, required this.message});
 
-void _showAlertDialog(BuildContext context, String message) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title:const Text(
-          'NumeroWhiz Alert',
-          style: TextStyle(fontSize: 20.0), // Set the title font size
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16.0),
+      ),
+      elevation: 0,
+      backgroundColor: Colors.transparent,
+      child: contentBox(context),
+    );
+  }
+
+  contentBox(context) {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [Color(0xFFC3DAAF), Color(0xFF96C969)],
         ),
-        content: Text(
-          message,
-          style: const TextStyle(fontSize: 18.0), // Set the content font size
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context); // Close the alert
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const Game1Screen()),
-              );
-            },
-            style: TextButton.styleFrom(
-              backgroundColor: Colors.blue,
-              foregroundColor: Colors.white,
-            ),
-            child: const Text(
-              'Play Again',
-              style: TextStyle(fontSize: 16.0), // Set the button font size
+        borderRadius: BorderRadius.circular(16.0),
+        border: Border.all(color: Color(0xFF689F38), width: 2.0),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            padding: EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                SizedBox(height: 8.0),
+                Image.asset(
+                  'assets/logo.png',
+                  height: 100,
+                  width: 100,
+                ),
+                SizedBox(height: 8.0),
+                Container(
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.fromLTRB(15, 15, 15, 0),
+                  child: Text(
+                    message,
+                    style: GoogleFonts.archivoNarrow(
+                      fontSize: 20.0,
+                      color: Colors.white,
+                      letterSpacing: 1.0,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
             ),
           ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context); // Close the alert
-              Navigator.push(context, MaterialPageRoute(builder: (context) => MainMenu()),
-              );
-            },
-            style: TextButton.styleFrom(
-              backgroundColor: Colors.green,
-              foregroundColor: Colors.white,
-            ),
-            child: const Text(
-              'Main Menu',
-              style: TextStyle(fontSize: 16.0), // Set the button font size
-            ),
+          SizedBox(height: 16.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Game1Screen()),
+                  );
+                },
+                style: TextButton.styleFrom(
+                  backgroundColor: Color(0xFF4E7D26),
+                  foregroundColor: Colors.white,
+                ),
+                child: Text(
+                  'Play Again',
+                  style: GoogleFonts.archivoNarrow(fontSize: 16.0, letterSpacing: 1.0),
+                ),
+              ),
+              SizedBox(width: 16.0),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MainMenu()),
+                  );
+                },
+                style: TextButton.styleFrom(
+                  backgroundColor: Color(0xFF4E7D26),
+                  foregroundColor: Colors.white,
+                ),
+                child: Text(
+                  'Main Menu',
+                  style: GoogleFonts.archivoNarrow(fontSize: 16.0, letterSpacing: 1.0),
+                ),
+              ),
+              SizedBox(height: 100.0),
+            ],
           ),
         ],
+      ),
+    );
+  }
+}
+
+void _showAlertDialogWin(BuildContext context, String message) {
+  showDialog(
+    barrierDismissible: false,
+    context: context,
+    builder: (BuildContext context) {
+      return CustomGradientDialogWin(
+        title: 'NumeroWhiz Alert',
+        message: message,
       );
     },
   );
 }
-
-
-
-
-
-
-
-
