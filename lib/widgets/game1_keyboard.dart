@@ -26,11 +26,16 @@ class _GameKeyboardState extends State<Game1Keyboard> {
     return Column(
       children: [
         Text(
-            HigherLowerGame.game_message,
-            style: GoogleFonts.archivoBlack(
-                fontSize: 25,
-                color: Color(0xFF9EB5F4),
-                letterSpacing: 0.2)
+          HigherLowerGame.game_message,
+          style: GoogleFonts.archivoBlack(
+            fontSize: 30,
+            color: HigherLowerGame.game_message.contains("GUESS LOWER")
+                ? Color(0xFFF9C425)
+                : (HigherLowerGame.game_message.contains("GUESS HIGHER")
+                ? Color(0xFFFF3D00)
+                : Color(0xFF9EB5F4)),
+            letterSpacing: 0.2,
+          ),
         ),
         const SizedBox(height: 100.0),
         Game1Board(widget.game),
