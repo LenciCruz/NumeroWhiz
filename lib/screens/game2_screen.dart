@@ -35,7 +35,8 @@ class _Game2ScreenState extends State<Game2Screen> {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => MainMenu()),
-            );          },
+            );
+          },
         ),
       ),
       body: Container(
