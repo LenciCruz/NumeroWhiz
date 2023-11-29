@@ -96,8 +96,8 @@ class _GameKeyboardState extends State<Game2Keyboard> {
                 element.code = 1;
               });
             });
-            // Check if the user has won and show an alert after 1.5 seconds
-            Future.delayed(const Duration(milliseconds: 800), () {
+            // Check if the user has won and show an alert after delay
+            Future.delayed(const Duration(milliseconds: 500), () {
               _showAlertDialogWin(
                   context, 'Congratulations! You have guessed the number correctly!');
             });
@@ -133,9 +133,9 @@ class _GameKeyboardState extends State<Game2Keyboard> {
             widget.game.rowId++;
             widget.game.letterId = 0;
 
-            // Check if the user has failed and show an alert after 2 seconds
+            // Check if the user has failed and show an alert after delay
             if (widget.game.rowId >= 5) {
-              Future.delayed(const Duration(seconds: 2), () {
+              Future.delayed(const Duration(milliseconds: 500), () {
                 _showAlertDialogLose(context, 'Uh oh! You have exceeded the amount of trials! Nice Try!');
               });
             }
