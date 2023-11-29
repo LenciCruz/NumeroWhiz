@@ -19,7 +19,7 @@ class _GameBoardState extends State<Game2Board> {
         children: e
             .map((e) => Container(
           padding: const EdgeInsets.all(16.0),
-          width: 70.0,
+          width: 75.0,
           height: 70.0,
           margin: const EdgeInsets.symmetric(vertical: 8.0),
           decoration: BoxDecoration(

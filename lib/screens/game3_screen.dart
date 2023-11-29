@@ -31,6 +31,7 @@ class _GameScreenState extends State<Game3Screen> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white, size: 25),
           onPressed: () {
+            PaDGame.game_message = "";
             Navigator.pop(context);
             Navigator.push(
               context,

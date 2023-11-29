@@ -31,6 +31,7 @@ class _Game2ScreenState extends State<Game2Screen> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white, size: 35),
           onPressed: () {
+            NumberdleGame.game_message = "";
             Navigator.pop(context);
             Navigator.push(
               context,
