@@ -77,6 +77,7 @@ class HomePage extends StatelessWidget {
                   style: GoogleFonts.archivoNarrow(
                     fontSize: 20,
                     color: Colors.black,
+                    letterSpacing: 3,
                   ),
                 ),
               ),
