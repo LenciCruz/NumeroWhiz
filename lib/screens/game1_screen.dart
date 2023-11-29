@@ -2,6 +2,7 @@
 import 'package:NumeroWhiz/utils/game1_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../widgets/game1_keyboard.dart';
 import 'mainmenu_screen.dart';
 
@@ -25,36 +26,53 @@ class _Game1ScreenState extends State<Game1Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF212121),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Row(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(left: 10.0),
-                child: IconButton(
-                  icon: Icon(Icons.arrow_back, color: Colors.white, size: 32),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              ),
-              SizedBox(width: 60.0),
-              Text(
-                "Higher Lower",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 36,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white, size: 25),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color(0xFF212121),
+              Color(0xFF43535E),
             ],
           ),
-          SizedBox(height: 2.0),
-          Game1Keyboard(_game),
-        ],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text('EASY', // Add your top text here
+                style: GoogleFonts.archivoBlack(
+                    fontSize: 15,
+                    color: Color(0xFFA5D7E8),
+                    letterSpacing: 10.0)),
+            Text(
+              'Higher Lower', // Add your top text here
+              style: GoogleFonts.lilitaOne(
+                fontSize: 45,
+                color: Color(0xFFD9D9D9),
+              ),
+            ),
+            Text('NumeroWhiz', // Add your top text here
+                style: GoogleFonts.archivoBlack(
+                    fontSize: 15,
+                    color: Color(0xFFA5D7E8),
+                    letterSpacing: 2.0)),
+            const SizedBox(height: 50.0),
+            Game1Keyboard(_game),
+          ],
+        ),
       ),
     );
   }

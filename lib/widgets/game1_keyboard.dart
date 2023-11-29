@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../screens/game1_screen.dart';
 import '../screens/mainmenu_screen.dart';
 import 'game1_board.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 
 
@@ -16,9 +17,8 @@ class Game1Keyboard extends StatefulWidget {
 
 class _GameKeyboardState extends State<Game1Keyboard> {
   List<List<String>> rows = [
-    ["0", "1", "2", "3", "4"],
-    ["5", "6", "7", "8", "9"],
-    ["DELETE", "SUBMIT"],
+    ["0", "1", "2", "3", "4", "5"],
+    ["DEL", "6", "7", "8", "9", "SUBMIT"],
   ];
 
   @override
@@ -26,12 +26,15 @@ class _GameKeyboardState extends State<Game1Keyboard> {
     return Column(
       children: [
         Text(
-          HigherLowerGame.game_message,
-          style: const TextStyle(color: Colors.white),
+            HigherLowerGame.game_message,
+            style: GoogleFonts.archivoBlack(
+                fontSize: 12,
+                color: Color(0xFF9EB5F4),
+                letterSpacing: 0.2)
         ),
-        const SizedBox(height: 0.0),
-        Game1Board(widget.game),
         const SizedBox(height: 5.0),
+        Game1Board(widget.game),
+        const SizedBox(height: 20.0),
         for (List<String> row in rows)
           Container(
             //: EdgeInsets.only(bottom: 8.0),
@@ -44,16 +47,19 @@ class _GameKeyboardState extends State<Game1Keyboard> {
                     handleKeyboardTap(e);
                   },
                   child: Container(
-                    padding: const EdgeInsets.all(25.0),
+                    padding: e == "SUBMIT"
+                        ? const EdgeInsets.fromLTRB(5, 24, 5, 24)
+                        : e == "DEL"
+                        ? const EdgeInsets.fromLTRB(18, 24, 18, 24)
+                        : const EdgeInsets.all(20.0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8.0),
                       color: Colors.grey.shade300,
                     ),
                     child: Text(
                       "${e}",
-                      style: const TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
+                      style: GoogleFonts.lilitaOne(
+                        fontSize: e == "SUBMIT" || e == "DEL" ? 18.0 : 25.0,
                       ),
                     ),
                   ),
@@ -89,7 +95,7 @@ class _GameKeyboardState extends State<Game1Keyboard> {
             });
           });
           // Check if the user has won and show an alert after 1.5 seconds
-          Future.delayed(const Duration(milliseconds: 800), () {
+          Future.delayed(const Duration(milliseconds: 500), () {
             _showAlertDialog(
                 context, 'Congratulations🎉, you guessed the number!');
           });
