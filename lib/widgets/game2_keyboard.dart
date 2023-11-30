@@ -1,3 +1,4 @@
+import 'package:NumeroWhiz/utils/game1_provider.dart';
 import 'package:flutter/material.dart';
 import '../screens/game2_screen.dart';
 import '../screens/mainmenu_screen.dart';
@@ -25,7 +26,7 @@ class _GameKeyboardState extends State<Game2Keyboard> {
       children: [
         const SizedBox(height: 15.0),
         Text(
-            NumberdleGame.game_message,
+            HigherLowerGame.game_message,
             style: GoogleFonts.archivoBlack(
                 fontSize: 12,
                 color: Color(0xFF9EB5F4),
@@ -81,17 +82,17 @@ class _GameKeyboardState extends State<Game2Keyboard> {
     } else if (value == "SUBMIT") {
       // setting the game rules
       if (widget.game.letterId >= 4) {
-        String guess = widget.game.numberdleBoard[widget.game.rowId]
+        String guess = widget.game.hlBoard[widget.game.rowId]
             .map((e) => e.letter)
             .join();
         print(guess);
-        print(NumberdleGame.game_guess == guess);
+        print(HigherLowerGame.game_guess == guess);
 
         if (widget.game.noRepeating(guess)) {
           //checkword
-          if (guess == NumberdleGame.game_guess) {
+          if (guess == HigherLowerGame.game_guess) {
             setState(() {
-              widget.game.numberdleBoard[widget.game.rowId].forEach((element) {
+              widget.game.hlBoard[widget.game.rowId].forEach((element) {
                 element.code = 1;
               });
             });
@@ -102,30 +103,30 @@ class _GameKeyboardState extends State<Game2Keyboard> {
             });
 
           } else {
-            print(NumberdleGame.game_guess);
+            print(HigherLowerGame.game_guess);
             int listLength = guess.length;
             for (int i = 0; i < listLength; i++) {
               String char = guess[i].toUpperCase();
-              print("the test: ${NumberdleGame.game_guess.contains(char)}");
-              if (NumberdleGame.game_guess.contains(char)) {
-                if (NumberdleGame.game_guess[i] == char) {
+              print("the test: ${HigherLowerGame.game_guess.contains(char)}");
+              if (HigherLowerGame.game_guess.contains(char)) {
+                if (HigherLowerGame.game_guess[i] == char) {
                   setState(() {
-                    NumberdleGame.game_message = "";
+                    HigherLowerGame.game_message = "";
                     print(char);
-                    widget.game.numberdleBoard[widget.game.rowId][i].code = 1;
+                    widget.game.hlBoard[widget.game.rowId][i].code = 1;
                   });
                 } else {
                   setState(() {
-                    NumberdleGame.game_message = "";
+                    HigherLowerGame.game_message = "";
                     print(char);
-                    widget.game.numberdleBoard[widget.game.rowId][i].code = 2;
+                    widget.game.hlBoard[widget.game.rowId][i].code = 2;
                   });
                 }
               } else {
                 setState(() {
-                  NumberdleGame.game_message = "";
+                  HigherLowerGame.game_message = "";
                   print(char);
-                  widget.game.numberdleBoard[widget.game.rowId][i].code = 3;
+                  widget.game.hlBoard[widget.game.rowId][i].code = 3;
                 });
               }
             }
@@ -142,7 +143,7 @@ class _GameKeyboardState extends State<Game2Keyboard> {
         }
         else {
           setState(() {
-            NumberdleGame.game_message =
+            HigherLowerGame.game_message =
             "Input has repeating values. Try again.";
           });
         }

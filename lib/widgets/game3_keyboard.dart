@@ -18,8 +18,6 @@ class _GameKeyboardState extends State<Game3Keyboard> {
     ["0", "1", "2", "3", "4", "5"],
     ["DEL", "6", "7", "8", "9", "SUBMIT"],
   ];
-  int correctNums = 0;
-  int correctPos = 0;
 
 
   @override
@@ -74,6 +72,9 @@ class _GameKeyboardState extends State<Game3Keyboard> {
   }
 
   void handleKeyboardTap(String value) {
+    int correctNumsInt = int.parse(widget.game.getCorrectNums());
+    int correctPosInt = int.parse(widget.game.getCorrectPos());
+
     if (value == "DEL") {
       if (widget.game.letterId > 0) {
         setState(() {
@@ -82,7 +83,9 @@ class _GameKeyboardState extends State<Game3Keyboard> {
           widget.game.letterId--;
         });
       }
-    } else if (value == "SUBMIT") {
+    }
+    //submit
+    else if (value == "SUBMIT") {
       if (widget.game.letterId >= 4) {
         String guess = widget.game.padBoard[widget.game.rowId]
             .map((e) => e.letter)
@@ -93,6 +96,7 @@ class _GameKeyboardState extends State<Game3Keyboard> {
         if (widget.game.noRepeating(guess)) {
           // checkword
           if (guess == PaDGame.game_guess) {
+            //four digits correct
             setState(() {
               widget.game.padBoard[widget.game.rowId]
                   .forEach((element) {
@@ -117,8 +121,8 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                   widget.game.letterId++;
                   setState(() {});
                 }
-                print("correct Nums: " + correctNums.toString());
-                print("correct Pos: " + correctPos.toString());
+                print("correct Nums: " + correctNumsInt.toString());
+                print("correct Pos: " + correctPosInt.toString());
               });
               // show alert
               // Check if the user has won and show an alert after delay
@@ -142,23 +146,25 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                 "the test: ${PaDGame.game_guess.contains(char)}",
               );
               if (PaDGame.game_guess.contains(char)) {
+                //may posisyon
                 if (PaDGame.game_guess[i] == char) {
+                  //
                   setState(() {
                     PaDGame.game_message = "";
                     print("char");
                     print(char);
                     widget.game.padBoard[widget.game.rowId][i]
                         .code = 1;
-                    correctNums++;
-                    correctPos++;
-                    widget.game.setCorrectPos(correctPos.toString());
-                    widget.game.setCorrectNums(correctNums.toString());
+                    correctNumsInt++;
+                    correctPosInt++;
+                    widget.game.setCorrectPos(correctPosInt.toString());
+                    widget.game.setCorrectNums(correctNumsInt.toString());
                   });
                   if (widget.game.resultsPosId < 2) {
                     print("resultsPosId");
                     print(widget.game.resultsPosId);
                     widget.game.insertPosResults(widget.game.resultsPosId,
-                        Results(correctPos.toString()));
+                        Results(correctPosInt.toString()));
                     widget.game.letterId++;
                     setState(() {});
                   }
@@ -166,28 +172,29 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                     print("resultsNumsId");
                     print(widget.game.resultNumsId);
                     widget.game.insertNumsResults(widget.game.resultNumsId,
-                        ResultsNums(correctNums.toString()));
+                        ResultsNums(correctNumsInt.toString()));
                     widget.game.letterId++;
                     setState(() {});
                   }
-                  print("correct Nums: " + correctNums.toString(),);
-                  print("correct Pos: " + correctPos.toString(),);
+                  print("correct Nums: " + correctNumsInt.toString(),);
+                  print("correct Pos: " + correctPosInt.toString(),);
                 } else {
+                  //wrong position
                   setState(() {
                     PaDGame.game_message = "";
                     print("char");
                     print(char);
                     widget.game.padBoard[widget.game.rowId][i]
                         .code = 1;
-                    correctNums++;
-                    widget.game.setCorrectPos(correctPos.toString());
-                    widget.game.setCorrectNums(correctNums.toString());
+                    correctNumsInt++;
+                    widget.game.setCorrectPos(correctPosInt.toString());
+                    widget.game.setCorrectNums(correctNumsInt.toString());
 
                     if (widget.game.resultsPosId < 2) {
                       print("resultsPosId");
                       print(widget.game.resultsPosId);
                       widget.game.insertPosResults(widget.game.resultsPosId,
-                          Results(correctPos.toString()));
+                          Results(correctPosInt.toString()));
                       widget.game.letterId++;
                       setState(() {});
                     }
@@ -197,12 +204,12 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                       //print(widget.game.rowId);
                       //widget.game.insertPosResults(widget.game.resultsPosId, Results(correctPos.toString()));
                       widget.game.insertNumsResults(widget.game.resultsPosId,
-                          ResultsNums(correctNums.toString()));
+                          ResultsNums(correctNumsInt.toString()));
                       widget.game.letterId++;
                       setState(() {});
                     }
-                    print("correct Nums: " + correctNums.toString(),);
-                    print("correct Pos: " + correctPos.toString(),);
+                    print("correct Nums: " + correctNumsInt.toString(),);
+                    print("correct Pos: " + correctPosInt.toString(),);
                   });
                 }
               } else {
@@ -212,14 +219,14 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                   print(char);
                   widget.game.padBoard[widget.game.rowId][i]
                       .code = 1;
-                  widget.game.setCorrectPos(correctPos.toString());
-                  widget.game.setCorrectNums(correctNums.toString());
+                  widget.game.setCorrectPos(correctPosInt.toString());
+                  widget.game.setCorrectNums(correctNumsInt.toString());
 
                   if (widget.game.resultsPosId < 2) {
                     print("resultsPosId");
                     print(widget.game.resultsPosId);
                     widget.game.insertPosResults(widget.game.resultsPosId,
-                        Results(correctPos.toString()));
+                        Results(correctPosInt.toString()));
                     widget.game.letterId++;
                     setState(() {});
                   }
@@ -227,12 +234,12 @@ class _GameKeyboardState extends State<Game3Keyboard> {
                     print("resultsNumsId");
                     print(widget.game.resultNumsId);
                     widget.game.insertNumsResults(widget.game.resultsPosId,
-                        ResultsNums(correctNums.toString()));
+                        ResultsNums(correctNumsInt.toString()));
                     widget.game.letterId++;
                     setState(() {});
                   }
-                  print("correct Nums: " + correctNums.toString(),);
-                  print("correct Pos: " + correctPos.toString(),);
+                  print("correct Nums: " + correctNumsInt.toString(),);
+                  print("correct Pos: " + correctPosInt.toString(),);
                 });
               }
             }
@@ -256,8 +263,10 @@ class _GameKeyboardState extends State<Game3Keyboard> {
 
         // Reset correctNums and correctPos after processing the submit action
         setState(() {
-          correctNums = 0;
-          correctPos = 0;
+          correctNumsInt = 0;
+          correctPosInt = 0;
+          widget.game.setCorrectPos(correctPosInt.toString());
+          widget.game.setCorrectNums(correctNumsInt.toString());
         });
       }
     } else {

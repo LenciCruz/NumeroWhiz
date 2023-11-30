@@ -6,31 +6,19 @@ class PaDGame {
   int letterId = 0;
   int resultNumsId = 0;
   int resultsPosId = 0;
-  String _correctPos = "";
-  String _correctNums = "";
+  String _correctPos = "0";
+  String _correctNums = "0";
   static String game_message = "";
   static String game_guess = "";
   static bool gameOver = false;
 
-  //setting the game row
-  static List<Letter> padRow = List.generate(
-    10,
-        (index) => Letter("", 0),
-  );
-
   //Setting the gameBoard
   List<List<Letter>> padBoard = List.generate(
       10,
-          (index) => List.generate(
-        4,
+      (index) => List.generate(
+            4,
             (index) => Letter("", 0),
-      ));
-
-  //Setting the Game Function
-  void passTry() {
-    rowId++;
-    letterId = 0;
-  }
+          ));
 
   static void initGame() {
     List<int> digits = List.generate(10, (index) => index)..shuffle();
@@ -39,29 +27,29 @@ class PaDGame {
 
   static List<Letter> resultsRowPos = List.generate(
     10,
-        (index) => Letter("", 0),
+    (index) => Letter("", 0),
   );
 
   //Setting the gameBoard
   List<List<Results>> resultsBoardPos = List.generate(
       10,
-          (index) => List.generate(
-        1,
+      (index) => List.generate(
+            1,
             (index) => Results(""),
-      ));
+          ));
 
   static List<Letter> resultsRowNums = List.generate(
     10,
-        (index) => Letter("", 0),
+    (index) => Letter("", 0),
   );
 
   //Setting the gameBoard
   List<List<ResultsNums>> resultsBoardNums = List.generate(
       10,
-          (index) => List.generate(
-        1,
+      (index) => List.generate(
+            1,
             (index) => ResultsNums(""),
-      ));
+          ));
 
   //Setting the game insertion
   void insertWord(index, word) {

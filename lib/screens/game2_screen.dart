@@ -1,3 +1,4 @@
+import 'package:NumeroWhiz/utils/game1_provider.dart';
 import 'package:flutter/material.dart';
 import '../utils/game2_provider.dart';
 import '../widgets/game2_keyboard.dart';
@@ -18,7 +19,7 @@ class _Game2ScreenState extends State<Game2Screen> {
   @override
   void initState() {
     super.initState();
-    NumberdleGame.initGame();
+    _game.initGame();
   }
 
   @override
@@ -31,7 +32,7 @@ class _Game2ScreenState extends State<Game2Screen> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white, size: 35),
           onPressed: () {
-            NumberdleGame.game_message = "";
+            HigherLowerGame.game_message = "";
             Navigator.pop(context);
             Navigator.push(
               context,
