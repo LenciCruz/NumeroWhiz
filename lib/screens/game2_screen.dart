@@ -18,7 +18,7 @@ class _Game2ScreenState extends State<Game2Screen> {
   @override
   void initState() {
     super.initState();
-    NumberdleGame.initGame();
+    _game.initGame([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]);
   }
 
   @override
@@ -31,7 +31,7 @@ class _Game2ScreenState extends State<Game2Screen> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white, size: 35),
           onPressed: () {
-            NumberdleGame.game_message = "";
+            _game.game_message = "";
             Navigator.pop(context);
             Navigator.push(
               context,
