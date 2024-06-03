@@ -87,6 +87,7 @@ class _GameKeyboardState extends State<Game1Keyboard> {
     } else if (value == "SUBMIT") {
       tries++;
 
+
       // setting the game rules
       if (widget.game.letterId >= 2) {
         String guess = widget.game.gameBoard[widget.game.rowId]
@@ -130,8 +131,20 @@ class _GameKeyboardState extends State<Game1Keyboard> {
             print(widget.game.game_guess);
             widget.game.rowId = 0;
           }
+<<<<<<< HEAD
         } else {
           print('invalid numeric input');
+=======
+          print(HigherLowerGame.game_guess);
+          widget.game.rowId = 0;
+          setState(() {
+            widget.game.insertWord(widget.game.letterId - 1, Letter("", 0));
+            widget.game.insertWord(widget.game.letterId - 2, Letter("", 0));
+            widget.game.letterId--;
+            widget.game.letterId--;
+
+          });
+>>>>>>> 73cd7b95e9adccebfbe6b411b892e55b21df0ff0
         }
         print(widget.game.game_guess);
         widget.game.rowId = 0;

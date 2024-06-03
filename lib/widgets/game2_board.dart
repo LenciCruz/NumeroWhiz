@@ -14,7 +14,11 @@ class _GameBoardState extends State<Game2Board> {
   @override
   Widget build(BuildContext context) {
     return Column(
+<<<<<<< HEAD
       children: widget.game.gameBoard
+=======
+      children: widget.game.hlBoard
+>>>>>>> 73cd7b95e9adccebfbe6b411b892e55b21df0ff0
           .map((e) => Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: e
