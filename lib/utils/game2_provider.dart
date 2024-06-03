@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 923f8886523f15f33a5984d512e6297e670c436f
+>>>>>>> 5b00bb586ed34ce50494bfeb5345192dc50ec46e
 import 'game.dart';
 
 class NumberdleGame extends Game {
@@ -10,6 +17,20 @@ class NumberdleGame extends Game {
   }
 
   //checking world
+=======
+import 'game1_provider.dart';
+
+class NumberdleGame extends HigherLowerGame {
+  NumberdleGame() : super(5, 4);
+
+  @override
+  void initGame() {
+    List<int> digits = List.generate(10, (index) => index)..shuffle();
+    HigherLowerGame.game_guess = "${digits[0]}${digits[1]}${digits[2]}${digits[3]}";
+  }
+
+  //checking word
+>>>>>>> 73cd7b95e9adccebfbe6b411b892e55b21df0ff0
   bool noRepeating(String input) {
     for (int i = 0; i < input.length - 1; i++) {
       for (int j = i + 1; j < input.length; j++) {
@@ -20,4 +41,14 @@ class NumberdleGame extends Game {
     }
     return true;
   }
+<<<<<<< HEAD
 }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+}
+>>>>>>> 73cd7b95e9adccebfbe6b411b892e55b21df0ff0
+>>>>>>> 923f8886523f15f33a5984d512e6297e670c436f
+>>>>>>> 5b00bb586ed34ce50494bfeb5345192dc50ec46e

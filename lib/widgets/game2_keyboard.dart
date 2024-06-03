@@ -1,3 +1,4 @@
+import 'package:NumeroWhiz/utils/game1_provider.dart';
 import 'package:flutter/material.dart';
 import '../screens/game2_screen.dart';
 import '../screens/mainmenu_screen.dart';
@@ -25,7 +26,20 @@ class _GameKeyboardState extends State<Game2Keyboard> {
     return Column(
       children: [
         const SizedBox(height: 15.0),
+<<<<<<< HEAD
         Text(widget.game.game_message,
+=======
+<<<<<<< HEAD
+        Text(widget.game.game_message,
+=======
+<<<<<<< HEAD
+        Text(widget.game.game_message,
+=======
+        Text(
+            HigherLowerGame.game_message,
+>>>>>>> 73cd7b95e9adccebfbe6b411b892e55b21df0ff0
+>>>>>>> 923f8886523f15f33a5984d512e6297e670c436f
+>>>>>>> 5b00bb586ed34ce50494bfeb5345192dc50ec46e
             style: GoogleFonts.archivoBlack(
                 fontSize: 12, color: Color(0xFF9EB5F4), letterSpacing: 0.2)),
         const SizedBox(height: 15.0),
@@ -77,6 +91,13 @@ class _GameKeyboardState extends State<Game2Keyboard> {
     } else if (value == "SUBMIT") {
       // setting the game rules
       if (widget.game.letterId >= 4) {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 923f8886523f15f33a5984d512e6297e670c436f
+>>>>>>> 5b00bb586ed34ce50494bfeb5345192dc50ec46e
         String guess = widget.game.gameBoard[widget.game.rowId]
             .map((e) => e.letter)
             .join();
@@ -90,6 +111,25 @@ class _GameKeyboardState extends State<Game2Keyboard> {
           if (guess == widget.game.game_guess) {
             setState(() {
               widget.game.gameBoard[widget.game.rowId].forEach((element) {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+        String guess = widget.game.hlBoard[widget.game.rowId]
+            .map((e) => e.letter)
+            .join();
+        print(guess);
+        print(HigherLowerGame.game_guess == guess);
+
+        if (widget.game.noRepeating(guess)) {
+          //checkword
+          if (guess == HigherLowerGame.game_guess) {
+            setState(() {
+              widget.game.hlBoard[widget.game.rowId].forEach((element) {
+>>>>>>> 73cd7b95e9adccebfbe6b411b892e55b21df0ff0
+>>>>>>> 923f8886523f15f33a5984d512e6297e670c436f
+>>>>>>> 5b00bb586ed34ce50494bfeb5345192dc50ec46e
                 element.code = 1;
               });
             });
@@ -99,6 +139,13 @@ class _GameKeyboardState extends State<Game2Keyboard> {
                   'Congratulations! You have guessed the number correctly!');
             });
           } else {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 923f8886523f15f33a5984d512e6297e670c436f
+>>>>>>> 5b00bb586ed34ce50494bfeb5345192dc50ec46e
             print(widget.game.game_guess);
             int listLength = guess.length;
             for (int i = 0; i < listLength; i++) {
@@ -116,13 +163,56 @@ class _GameKeyboardState extends State<Game2Keyboard> {
                     widget.game.game_message = "";
                     print(char);
                     widget.game.gameBoard[widget.game.rowId][i].code = 2;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+            print(HigherLowerGame.game_guess);
+            int listLength = guess.length;
+            for (int i = 0; i < listLength; i++) {
+              String char = guess[i].toUpperCase();
+              print("the test: ${HigherLowerGame.game_guess.contains(char)}");
+              if (HigherLowerGame.game_guess.contains(char)) {
+                if (HigherLowerGame.game_guess[i] == char) {
+                  setState(() {
+                    HigherLowerGame.game_message = "";
+                    print(char);
+                    widget.game.hlBoard[widget.game.rowId][i].code = 1;
+                  });
+                } else {
+                  setState(() {
+                    HigherLowerGame.game_message = "";
+                    print(char);
+                    widget.game.hlBoard[widget.game.rowId][i].code = 2;
+>>>>>>> 73cd7b95e9adccebfbe6b411b892e55b21df0ff0
+>>>>>>> 923f8886523f15f33a5984d512e6297e670c436f
+>>>>>>> 5b00bb586ed34ce50494bfeb5345192dc50ec46e
                   });
                 }
               } else {
                 setState(() {
+<<<<<<< HEAD
                   widget.game.game_message = "";
                   print(char);
                   widget.game.gameBoard[widget.game.rowId][i].code = 3;
+=======
+<<<<<<< HEAD
+                  widget.game.game_message = "";
+                  print(char);
+                  widget.game.gameBoard[widget.game.rowId][i].code = 3;
+=======
+<<<<<<< HEAD
+                  widget.game.game_message = "";
+                  print(char);
+                  widget.game.gameBoard[widget.game.rowId][i].code = 3;
+=======
+                  HigherLowerGame.game_message = "";
+                  print(char);
+                  widget.game.hlBoard[widget.game.rowId][i].code = 3;
+>>>>>>> 73cd7b95e9adccebfbe6b411b892e55b21df0ff0
+>>>>>>> 923f8886523f15f33a5984d512e6297e670c436f
+>>>>>>> 5b00bb586ed34ce50494bfeb5345192dc50ec46e
                 });
               }
             }
@@ -139,7 +229,20 @@ class _GameKeyboardState extends State<Game2Keyboard> {
           }
         } else {
           setState(() {
+<<<<<<< HEAD
             widget.game.game_message = "Input has repeating values. Try again.";
+=======
+<<<<<<< HEAD
+            widget.game.game_message = "Input has repeating values. Try again.";
+=======
+<<<<<<< HEAD
+            widget.game.game_message = "Input has repeating values. Try again.";
+=======
+            HigherLowerGame.game_message =
+            "Input has repeating values. Try again.";
+>>>>>>> 73cd7b95e9adccebfbe6b411b892e55b21df0ff0
+>>>>>>> 923f8886523f15f33a5984d512e6297e670c436f
+>>>>>>> 5b00bb586ed34ce50494bfeb5345192dc50ec46e
           });
         }
       }

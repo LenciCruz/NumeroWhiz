@@ -13,13 +13,25 @@ class Game1Screen extends StatefulWidget {
 }
 
 class _Game1ScreenState extends State<Game1Screen> {
-  final HigherLowerGame _game = HigherLowerGame();
+  final HigherLowerGame _game = HigherLowerGame(1, 2);
   late String word;
 
   @override
   void initState() {
     super.initState();
+<<<<<<< HEAD
     _game.initGame([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]);
+=======
+<<<<<<< HEAD
+    _game.initGame([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]);
+=======
+<<<<<<< HEAD
+    _game.initGame([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]);
+=======
+    _game.initGame();
+>>>>>>> 73cd7b95e9adccebfbe6b411b892e55b21df0ff0
+>>>>>>> 923f8886523f15f33a5984d512e6297e670c436f
+>>>>>>> 5b00bb586ed34ce50494bfeb5345192dc50ec46e
   }
 
   @override
