@@ -19,7 +19,7 @@ class _Game1ScreenState extends State<Game1Screen> {
   @override
   void initState() {
     super.initState();
-    HigherLowerGame.initGame();
+    _game.initGame([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]);
   }
 
   @override
@@ -32,7 +32,7 @@ class _Game1ScreenState extends State<Game1Screen> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white, size: 35),
           onPressed: () {
-            HigherLowerGame.game_message = "";
+            _game.game_message = "";
             Navigator.pop(context);
             Navigator.push(
               context,

@@ -4,6 +4,7 @@ import '../screens/mainmenu_screen.dart';
 import '../utils/game2_provider.dart';
 import 'game2_board.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../utils/game.dart';
 
 class Game2Keyboard extends StatefulWidget {
   Game2Keyboard(this.game, {Key? key}) : super(key: key);
@@ -24,13 +25,9 @@ class _GameKeyboardState extends State<Game2Keyboard> {
     return Column(
       children: [
         const SizedBox(height: 15.0),
-        Text(
-            NumberdleGame.game_message,
+        Text(widget.game.game_message,
             style: GoogleFonts.archivoBlack(
-                fontSize: 12,
-                color: Color(0xFF9EB5F4),
-                letterSpacing: 0.2)
-        ),
+                fontSize: 12, color: Color(0xFF9EB5F4), letterSpacing: 0.2)),
         const SizedBox(height: 15.0),
         Game2Board(widget.game),
         const SizedBox(height: 20.0),
@@ -48,8 +45,8 @@ class _GameKeyboardState extends State<Game2Keyboard> {
                     padding: e == "SUBMIT"
                         ? const EdgeInsets.fromLTRB(5, 24, 5, 24)
                         : e == "DEL"
-                        ? const EdgeInsets.fromLTRB(18, 24, 18, 24)
-                        : const EdgeInsets.all(20.0),
+                            ? const EdgeInsets.fromLTRB(18, 24, 18, 24)
+                            : const EdgeInsets.all(20.0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8.0),
                       color: Colors.grey.shade300,
@@ -58,7 +55,6 @@ class _GameKeyboardState extends State<Game2Keyboard> {
                       "${e}",
                       style: GoogleFonts.lilitaOne(
                         fontSize: e == "SUBMIT" || e == "DEL" ? 18.0 : 25.0,
-
                       ),
                     ),
                   ),
@@ -81,51 +77,52 @@ class _GameKeyboardState extends State<Game2Keyboard> {
     } else if (value == "SUBMIT") {
       // setting the game rules
       if (widget.game.letterId >= 4) {
-        String guess = widget.game.numberdleBoard[widget.game.rowId]
+        String guess = widget.game.gameBoard[widget.game.rowId]
             .map((e) => e.letter)
             .join();
         print(guess);
-        print(NumberdleGame.game_guess == guess);
+        print(widget.game.game_guess);
+
+        print(widget.game.game_guess == guess);
 
         if (widget.game.noRepeating(guess)) {
           //checkword
-          if (guess == NumberdleGame.game_guess) {
+          if (guess == widget.game.game_guess) {
             setState(() {
-              widget.game.numberdleBoard[widget.game.rowId].forEach((element) {
+              widget.game.gameBoard[widget.game.rowId].forEach((element) {
                 element.code = 1;
               });
             });
             // Check if the user has won and show an alert after delay
             Future.delayed(const Duration(milliseconds: 500), () {
-              _showAlertDialogWin(
-                  context, 'Congratulations! You have guessed the number correctly!');
+              _showAlertDialogWin(context,
+                  'Congratulations! You have guessed the number correctly!');
             });
-
           } else {
-            print(NumberdleGame.game_guess);
+            print(widget.game.game_guess);
             int listLength = guess.length;
             for (int i = 0; i < listLength; i++) {
               String char = guess[i].toUpperCase();
-              print("the test: ${NumberdleGame.game_guess.contains(char)}");
-              if (NumberdleGame.game_guess.contains(char)) {
-                if (NumberdleGame.game_guess[i] == char) {
+              print("the test: ${widget.game.game_guess.contains(char)}");
+              if (widget.game.game_guess.contains(char)) {
+                if (widget.game.game_guess[i] == char) {
                   setState(() {
-                    NumberdleGame.game_message = "";
+                    widget.game.game_message = "";
                     print(char);
-                    widget.game.numberdleBoard[widget.game.rowId][i].code = 1;
+                    widget.game.gameBoard[widget.game.rowId][i].code = 1;
                   });
                 } else {
                   setState(() {
-                    NumberdleGame.game_message = "";
+                    widget.game.game_message = "";
                     print(char);
-                    widget.game.numberdleBoard[widget.game.rowId][i].code = 2;
+                    widget.game.gameBoard[widget.game.rowId][i].code = 2;
                   });
                 }
               } else {
                 setState(() {
-                  NumberdleGame.game_message = "";
+                  widget.game.game_message = "";
                   print(char);
-                  widget.game.numberdleBoard[widget.game.rowId][i].code = 3;
+                  widget.game.gameBoard[widget.game.rowId][i].code = 3;
                 });
               }
             }
@@ -135,15 +132,14 @@ class _GameKeyboardState extends State<Game2Keyboard> {
             // Check if the user has failed and show an alert after delay
             if (widget.game.rowId >= 5) {
               Future.delayed(const Duration(milliseconds: 500), () {
-                _showAlertDialogLose(context, 'Uh oh! You have exceeded the amount of trials! Nice Try!');
+                _showAlertDialogLose(context,
+                    'Uh oh! You have exceeded the amount of trials! Nice Try!');
               });
             }
           }
-        }
-        else {
+        } else {
           setState(() {
-            NumberdleGame.game_message =
-            "Input has repeating values. Try again.";
+            widget.game.game_message = "Input has repeating values. Try again.";
           });
         }
       }
@@ -155,7 +151,6 @@ class _GameKeyboardState extends State<Game2Keyboard> {
       }
     }
   }
-
 }
 
 class CustomGradientDialogWin extends StatelessWidget {
@@ -226,7 +221,8 @@ class CustomGradientDialogWin extends StatelessWidget {
                   Navigator.pop(context);
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const Game2Screen()),
+                    MaterialPageRoute(
+                        builder: (context) => const Game2Screen()),
                   );
                 },
                 style: TextButton.styleFrom(
@@ -235,7 +231,8 @@ class CustomGradientDialogWin extends StatelessWidget {
                 ),
                 child: Text(
                   'Play Again',
-                  style: GoogleFonts.archivoNarrow(fontSize: 16.0, letterSpacing: 1.0),
+                  style: GoogleFonts.archivoNarrow(
+                      fontSize: 16.0, letterSpacing: 1.0),
                 ),
               ),
               SizedBox(width: 16.0),
@@ -253,7 +250,8 @@ class CustomGradientDialogWin extends StatelessWidget {
                 ),
                 child: Text(
                   'Main Menu',
-                  style: GoogleFonts.archivoNarrow(fontSize: 16.0, letterSpacing: 1.0),
+                  style: GoogleFonts.archivoNarrow(
+                      fontSize: 16.0, letterSpacing: 1.0),
                 ),
               ),
               SizedBox(height: 100.0),
@@ -277,8 +275,6 @@ void _showAlertDialogWin(BuildContext context, String message) {
     },
   );
 }
-
-
 
 class CustomGradientDialogLose extends StatelessWidget {
   final String title;
@@ -331,8 +327,7 @@ class CustomGradientDialogLose extends StatelessWidget {
                     style: GoogleFonts.archivoNarrow(
                         fontSize: 20.0,
                         color: Colors.white,
-                        letterSpacing: 1.0
-                    ),
+                        letterSpacing: 1.0),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -348,7 +343,8 @@ class CustomGradientDialogLose extends StatelessWidget {
                   Navigator.pop(context);
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const Game2Screen()),
+                    MaterialPageRoute(
+                        builder: (context) => const Game2Screen()),
                   );
                 },
                 style: TextButton.styleFrom(
@@ -357,7 +353,8 @@ class CustomGradientDialogLose extends StatelessWidget {
                 ),
                 child: Text(
                   'Play Again',
-                  style: GoogleFonts.archivoNarrow(fontSize: 16.0, letterSpacing: 1.0),
+                  style: GoogleFonts.archivoNarrow(
+                      fontSize: 16.0, letterSpacing: 1.0),
                 ),
               ),
               SizedBox(width: 16.0),
@@ -375,7 +372,8 @@ class CustomGradientDialogLose extends StatelessWidget {
                 ),
                 child: Text(
                   'Main Menu',
-                  style: GoogleFonts.archivoNarrow(fontSize: 16.0, letterSpacing: 1.0),
+                  style: GoogleFonts.archivoNarrow(
+                      fontSize: 16.0, letterSpacing: 1.0),
                 ),
               ),
               SizedBox(height: 100.0),
