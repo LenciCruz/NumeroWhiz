@@ -86,6 +86,10 @@ class _GameKeyboardState extends State<Game1Keyboard> {
       }
     } else if (value == "SUBMIT") {
       tries++;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 923f8886523f15f33a5984d512e6297e670c436f
 
       // setting the game rules
       if (widget.game.letterId >= 2) {
@@ -130,8 +134,25 @@ class _GameKeyboardState extends State<Game1Keyboard> {
             print(widget.game.game_guess);
             widget.game.rowId = 0;
           }
+<<<<<<< HEAD
         } else {
           print('invalid numeric input');
+=======
+<<<<<<< HEAD
+        } else {
+          print('invalid numeric input');
+=======
+          print(HigherLowerGame.game_guess);
+          widget.game.rowId = 0;
+          setState(() {
+            widget.game.insertWord(widget.game.letterId - 1, Letter("", 0));
+            widget.game.insertWord(widget.game.letterId - 2, Letter("", 0));
+            widget.game.letterId--;
+            widget.game.letterId--;
+
+          });
+>>>>>>> 73cd7b95e9adccebfbe6b411b892e55b21df0ff0
+>>>>>>> 923f8886523f15f33a5984d512e6297e670c436f
         }
         print(widget.game.game_guess);
         widget.game.rowId = 0;
